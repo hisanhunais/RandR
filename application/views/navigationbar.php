@@ -4,20 +4,20 @@
 $homeActive =  $aboutActive = $contactActive = $menuActive = '';
 $active = "active";
 
-switch(basename($_SERVER['PHP_SELF'])) {
-    case 'home.php':
+switch($this->uri->segment(2,"home")) {
+    case 'home':
         $homeActive = $active;
     break;
 
-    case 'about.php':
+    case 'about':
         $aboutActive = $active;
     break;
 
-    case 'contact.php':
+    case 'contact':
         $contactActive = $active;
     break;
 
-    case 'menu.php':
+    case 'menu':
         $menuActive = $active;
     break;
 
@@ -44,7 +44,7 @@ switch(basename($_SERVER['PHP_SELF'])) {
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="<?php echo $homeActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/index">Home</a></li>
+                <li class="<?php echo $homeActive;?>"><a href="<?php echo base_url(); ?>">Home</a></li>
                 <li class="<?php echo $aboutActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/about">About</a></li>
                 <li class="<?php echo $menuActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/menu">Menu</a></li>
                 <li class="<?php echo $contactActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/contact">Contact</a></li> 

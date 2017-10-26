@@ -28,6 +28,12 @@ class Welcome extends CI_Controller {
 		$this->load->view('about');
 	}
 
+	public function admin()
+	{
+		$this->load->view('admin/home');
+	}
+
+
 	public function menu()
 	{
 		$this->load->model("main_model");
@@ -41,6 +47,27 @@ class Welcome extends CI_Controller {
 		$data["fetch_item"] = $this->main_model->get_item_details($id);
 		$data["fetch_reviews"] = $this->main_model->get_item_reviews($id);
 		$this->load->view('item_page',$data);
+	}
+
+	public function menu_item_byname()
+	{
+		/*$output = array();
+		$this->load->model("main_model");
+		$data = $this->main_model->get_item_byname($_POST['searchData']);
+
+		foreach ($data as $row) 
+		{
+			$output['name'] = $row->name;
+			$output['description'] = $row->description;
+			$output['price'] = $row->price;
+			$output['image'] = $row->image;
+		}
+
+		echo json_encode($output);*/
+		$this->load->model("main_model");
+		$search = $this->input->post('search');
+		$output = $this->main_model->get_item_byname($search);
+		echo json_encode($output);
 	}
 
 	public function contact()

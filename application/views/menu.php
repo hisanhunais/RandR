@@ -62,7 +62,7 @@
       <div class="row" style="margin-top: 10px;">
         <div class = "col-md-12" id="loadSection">
           <div class="panel">
-            <div class="panel-body">
+            <div class="panel-body" id="itemContent"> 
               <?php 
                 foreach($fetch_data->result() as $row)
                 {
@@ -156,3 +156,37 @@
     <!--<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>-->
   </body>
 </html>
+
+<!--<script>
+  $(document).ready(function()
+  {
+    $('#search').keyup(function()
+      { 
+        var txt = document.getElementById('search').value;
+
+            $.ajax(
+              {
+                url:"<?php echo base_url(); ?>index.php/Welcome/menu_item_byname",
+                method:"post",
+                data:{searchData:txt},
+                dataType:"json",
+                success:function(data)
+                {
+                  $('#itemContent').html("");
+                  var obj = JSON.parse(response);
+                  if(obj.length>0)
+                  {
+                    try
+                    {
+                      var items[];
+                      $.each(obj, function(i,val){
+                        items.push
+                      });  
+                    }                    
+                  }
+                }
+              });
+        
+      });
+  });
+</script>-->

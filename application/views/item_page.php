@@ -96,19 +96,20 @@
 
       <div class="row">
         <div class="col-md-12">
-          <?php 
-            foreach($fetch_reviews->result() as $row)
-            {
-          ?>
           <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body fixed-panel">
+              <?php 
+                foreach($fetch_reviews->result() as $row)
+                {
+              ?>
               <h3><?php echo $row->username; ?></h3>
               <p><?php echo $row->comment; ?></p>
+              <hr />
+             <?php 
+               }
+             ?>
             </div>
           </div>
-          <?php 
-            }
-          ?>
         </div>
       </div>
 
