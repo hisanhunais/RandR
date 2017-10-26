@@ -14,9 +14,9 @@
 
     <!-- Bootstrap core CSS -->
     <!--<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
-	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">-->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	
+  <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">-->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
 
@@ -37,7 +37,34 @@
   <body>
     
     <?php include 'navigationbar.php'; ?>
-    
+
+    <div class="container">
+        <div class="jumbotron">
+            <hr>
+           <h3>Contact Us!</h3>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <b><u>Mailing Address</u></b>
+                    <br>name of bussiness,<br/>
+                    street,<br/>
+                    town,</br>
+                    city</p>
+
+                <b><u>Telephone</u></b>
+                    <p>011-*******</p>
+
+                <b><u>Fax</u></b>
+                    <p>94*******</p>
+
+                <b><u>E-mail</u></b>
+                    <p>Rfoods@***</p>
+
+            </div>
+        </div>
+
+    </div>
 
 
       
@@ -57,7 +84,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
