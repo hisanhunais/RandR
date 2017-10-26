@@ -30,7 +30,17 @@ class Welcome extends CI_Controller {
 
 	public function menu()
 	{
-		$this->load->view('menu');
+		$this->load->model("main_model");
+		$data["fetch_data"] = $this->main_model->get_items();
+		$this->load->view('menu',$data);
+	}
+
+	public function menu_item($id)
+	{
+		$this->load->model("main_model");
+		$data["fetch_item"] = $this->main_model->get_item_details($id);
+		$data["fetch_reviews"] = $this->main_model->get_item_reviews($id);
+		$this->load->view('item_page',$data);
 	}
 
 	public function contact()

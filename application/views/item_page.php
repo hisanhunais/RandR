@@ -18,6 +18,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="http://demos.maxoffsky.com/shop-reviews/js/starrr.js"></script>
 	
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
@@ -34,6 +35,7 @@
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>css/carousel.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>css/itemPage.css" rel="stylesheet">
   </head>
 <!-- NAVBAR
 ================================================== -->
@@ -42,37 +44,20 @@
     <?php include 'navigationbar.php'; ?>
 
     <div class="container">
-      <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-          <div id="imaginary_container"> 
-            <div class="input-group stylish-input-group">
-              <input type="text" class="form-control"  placeholder="Search"   id="search" >
-              <span class="input-group-addon">
-              <button type="submit">
-              <!--<i class="fa fa-search" aria-hidden="true"></i>-->
-              <!--<span class="glyphicon glyphicon-search"></span>-->
-              <i class="fa fa-search" aria-hidden="true"></i>
-              </button>  
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div class="row" style="margin-top: 10px;">
         <div class = "col-md-12" id="loadSection">
           <div class="panel">
             <div class="panel-body">
               <?php 
-                foreach($fetch_data->result() as $row)
+                foreach($fetch_item->result() as $row)
                 {
               ?>
-              <div class="col-sm-4 col-lg-4 col-md-4">
+              <div class="col-md-12">
                 <div class="thumbnail">
-                  <img src="http://placehold.it/320x150" alt="">
-                  <div class="caption">
+                  <img src="http://placehold.it/820x320" alt="">
+                  <div class="caption-full">
                     <h4 class="pull-right">Rs.<?php echo $row->price; ?></h4>
-                    <h4><a href="<?php echo base_url(); ?>index.php/Welcome/menu_item/<?php echo $row->itemID; ?>"><?php echo $row->name; ?></a></h4>
+                    <h4><?php echo $row->name; ?></h4>
                     <p><?php echo $row->description;?></p>
                   </div>
                   <div class="ratings">
@@ -93,40 +78,41 @@
             </div>
           </div>
         </div>  
-      </div>  
-      
+      </div>
 
-          <!--<div id="livesearch">
+      <div class="row">
+        <div class="col-md-12">
+          <form method="POST" action="#" accept-charset="UTF-8">  
+            <input name="_token" type="hidden" value="judkeKLbcKuAcR3yyrIfwcfvVXJ398ZnpQJZmxKV">                  
+            <input id="ratings-hidden" name="rating" type="hidden">                  
+            <textarea rows="5" id="new-review" class="form-control animated" placeholder="Enter your review here..." name="comment" cols="50"></textarea>                  
+            <div class="text-right">
+              <div class="stars starrr" data-rating="0"></div>
+              <button name="commentBtn" class="btn btn-success" type="submit">Comment</button>
+            </div>
+          </form> 
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
           <?php 
-
-          foreach($fetch_data->result() as $row)
-          {
-           
-          ?>       
-              
-          
-
-        
-        <div class="col-md-3 col-sm-6 "  style="margin-bottom: 20px;">
-          <div class="card h-100">
-            
-            <img class="card-img-top" src=<?php echo $row->image; ?> alt="Image"></a>
-            <div class="card-body">
-              <h4 class="card-title">
-                
-              <?php echo $row->name; ?>
-              </h4>
-          
-              <p class="card-text"><?php echo $row->description; ?></p>
-              <p class="card-text"><?php echo $row->price; ?></p>
+            foreach($fetch_reviews->result() as $row)
+            {
+          ?>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <h3><?php echo $row->username; ?></h3>
+              <p><?php echo $row->comment; ?></p>
             </div>
           </div>
+          <?php 
+            }
+          ?>
         </div>
-        
-        <?php } ?>
-       </div>
-        </div>-->
       </div>
+
+    </div>
 
       
 
