@@ -10,7 +10,9 @@ class Admin extends CI_Controller {
 
 	public function items()
 	{
-		$this->load->view('admin/items');
+		$this->load->model("main_model");
+		$data["fetch_itemlist"] = $this->main_model->get_items();
+		$this->load->view('admin/items',$data);
 	}
 
 	public function orders()

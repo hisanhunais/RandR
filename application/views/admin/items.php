@@ -30,14 +30,49 @@
 	            </div>
 				<div class="col-md-9">
 					<div class="panel panel-default">
-						<!--<div class="panel-heading main-color-bg">
-							<h3 class="panel-title">Home Buyer</h3>
-							
-						  </div>-->
+						<div class="panel-heading main-color-bg">
+							<h3 class="panel-title main-color-bg">Items</h3>
+						 </div>
 						<div class="panel-body">
 							<div class="row">
 								<div class = "col-md-12" id="loadSection">
-									<!--<img src="../../Images/farmfinancetopheader" width="100%">-->
+									<div class="table-responsive">
+										<button type="button" class="btn btn-md main-color-bg">
+											<span class="glyphicon glyphicon-plus-sign"> Add
+										</button>
+										<br><br>
+										<table class="table table-bordered">
+											<thead>
+												<tr>
+													<td width="20%">Name</td>
+													<td width="40%">Description</td>
+													<td width="10%">Price (Rs)</td>
+													<td width="10%">Image</td>
+													<td width="10%"></td>
+													<td width="10%"></td>
+												</tr>
+											</thead>
+											<tbody>
+											<?php 
+                								foreach($fetch_itemlist->result() as $row)
+                								{
+                									$imgsrc = base_url().$row->image;
+                									/*echo base_url(); ?>images/<?php echo $row->image;<img src="<?php echo $imgsrc; ?>" width="50" height="35" class="img-thumbnail">*/
+              								?>
+              									<tr>
+              										<td width="20%"><?php echo $row->name; ?></td>
+													<td width="40%"><?php echo $row->description; ?></td>
+													<td width="10%"><?php echo $row->price; ?></td>
+													<td width="10%"><img src="<?php echo $imgsrc; ?>" width="50" height="35" class="img-thumbnail" alt="image"></td>
+													<td width="10%">Edit</td>
+													<td width="10%">Delete</td>
+              									</tr>
+              								<?php 
+              									}
+              								?>
+              								</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>
