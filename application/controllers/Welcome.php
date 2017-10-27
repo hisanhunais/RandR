@@ -74,4 +74,22 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('contact');
 	}
+
+	public function add_reviews()
+	{
+		$this->load->model('main_model');
+
+		$data = array(
+			"reviewID" => "REV30",
+			"itemID" => "ITEM01",
+			"username" => "Nimal",
+			"date" => date("Y-m-d"),
+			"time" => date("h:i:sa"),
+			"comment" => $this->input->post("comment"),
+			"rating" => $this->input->post("rating")
+		);
+
+		$this->main_model->insert_item_review($data);
+		$this->menu_item("ITEM01");
+	}
 }

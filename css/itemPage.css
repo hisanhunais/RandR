@@ -43,6 +43,6 @@
       }
 
       .fixed-panel{
-        max-height: 10;
-        overflow-y: scroll;
+        /*max-height: 10;
+        overflow-y: scroll;*/
       }
