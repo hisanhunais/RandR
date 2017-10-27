@@ -30,6 +30,15 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <style>
+    #map{
+        height :400px;
+        width : 100%;
+
+    }
+</style>
+
+
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>css/carousel.css" rel="stylesheet">
   </head>
@@ -46,23 +55,105 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <b><u>Mailing Address</u></b>
-                    <br>name of bussiness,<br/>
-                    street,<br/>
-                    town,</br>
-                    city</p>
+                <div class="row">
+                    <form action="form.php" method="post">
+                    <div class="col-md-6">
+                       <ul> 
+                        Name    : <input type="text" name="name"/><br/><br/>
+                        Email   : <br/><input type="email" name="eMail"/><br/><br/>
+                        Phone   : <input type="phone" name="phone"/><br/><br/>
+                        Subject : <input type="subject" name="subject"/><br/><br/> 
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        Message: <textarea rows="6" cols="30" name="message"> </textarea><br/><br/>
+                    </div>
+                    <input type="submit" name="submit" value="send"/>
 
-                <b><u>Telephone</u></b>
-                    <p>011-*******</p>
+                    </form>
+                </div>
+      
+            </div>
+            <div class="col-md-6">
+                        
 
-                <b><u>Fax</u></b>
-                    <p>94*******</p>
+            <div class="container-fluid" id = map>
 
-                <b><u>E-mail</u></b>
-                    <p>Rfoods@***</p>
+
+                <div id="map"></div>
+                <script>
+                    function initMap(){
+                        // Map options
+                        var options = {
+                            zoom:13,
+                            center:{lat : 6.894070, lng: 79.902481}
+                        }
+
+                        // New map
+                        var map = new google.maps.Map(document.getElementById('map'), options);
+
+
+
+
+                        // Array of markers
+                        var markers = [
+                            {
+                                coords:{lat : 7.290572, lng: 80.633728},
+                                content:'<h2>Kandy</h2>'
+                            },
+                            {
+                                coords:{lat : 6.927079, lng: 79.861244},
+                                content:'<h2>Colombo MA</h2>'
+                            },
+                            {
+                                coords:{lat : 6.894070, lng: 79.902481}
+                            }
+                        ];
+
+                        // Loop through markers
+                        for(var i = 0;i < markers.length;i++){
+                            // Add marker
+                            addMarker(markers[i]);
+                        }
+
+                        // Add Marker Function
+                        function addMarker(props){
+                            var marker = new google.maps.Marker({
+                                position:props.coords,
+                                map:map,
+                                //icon:props.iconImage
+                            });
+
+                            // Check for customicon
+                            if(props.iconImage){
+                                // Set icon image
+                                marker.setIcon(props.iconImage);
+                            }
+
+                            // Check content
+                            if(props.content){
+                                var infoWindow = new google.maps.InfoWindow({
+                                    content:props.content
+                                });
+
+                                marker.addListener('click', function(){
+                                    infoWindow.open(map, marker);
+                                });
+                            }
+                        }
+                    }
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZqgB95gjNr18bqMG7TFjFTLuJr6OMRAY&callback=initMap">
+
+                </script>
 
             </div>
+
         </div>
+            </div>
+        </div>
+        
 
     </div>
 
