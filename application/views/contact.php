@@ -56,7 +56,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row">
-                    <form action="form.php" method="post">
+                    <?php echo validation_errors(); ?>
+                    <?php echo form_open('Contact/contactUs'); ?>
+                    
                     <div class="col-md-6">
                        <ul> 
                         Name    : <input type="text" name="name"/><br/><br/>
@@ -70,7 +72,7 @@
                     </div>
                     <input type="submit" name="submit" value="send"/>
 
-                    </form>
+                    <?php echo form_close();  ?>
                 </div>
       
             </div>
