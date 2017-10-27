@@ -31,5 +31,32 @@ class Main_model extends CI_Model
 		$query = $this->db->get();
 		return $query;
 	}
+
+	function get_item_byname($name)
+	{
+		/*$query = "";
+
+
+		if($name = "")
+		{
+			$query = $this->db->get("item");
+		}
+		else
+		{
+			$this->db->select('*');
+			$this->db->from('item');
+			$this->db->where('itemID',$id);
+			$query = $this->db->get();
+		}
+
+		return $query->result();*/
+
+		$this->db->select("*");
+		$whereCondition = array('name' => $name);
+		$this->db->where($whereCondition);
+		$this->db->from('item');
+		$query = $this->db->get();
+		return $query->result();
+	}
 }
 ?>
