@@ -58,5 +58,15 @@ class Main_model extends CI_Model
 		$query = $this->db->get();
 		return $query->result();
 	}
+
+	function insert_item($data)
+	{
+		$this->db->insert('item', $data);
+	}
+
+	function insert_item_review($data)
+	{
+		$this->db->insert('item_review', $data);
+	}
 }
 ?>

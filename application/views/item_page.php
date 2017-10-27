@@ -82,7 +82,7 @@
 
       <div class="row">
         <div class="col-md-12">
-          <form method="POST" action="#" accept-charset="UTF-8">  
+          <form method="POST" action="<?php echo base_url() ?>index.php/Welcome/add_reviews" accept-charset="UTF-8">  
             <input name="_token" type="hidden" value="judkeKLbcKuAcR3yyrIfwcfvVXJ398ZnpQJZmxKV">                  
             <input id="ratings-hidden" name="rating" type="hidden">                  
             <textarea rows="5" id="new-review" class="form-control animated" placeholder="Enter your review here..." name="comment" cols="50"></textarea>                  
@@ -93,16 +93,28 @@
           </form> 
         </div>
       </div>
-
+      <br>
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default">
-            <div class="panel-body fixed-panel">
+            <div class="panel-body">
               <?php 
                 foreach($fetch_reviews->result() as $row)
                 {
               ?>
-              <h3><?php echo $row->username; ?></h3>
+              <?php echo $row->username; ?>
+              <?php
+              $stars = round($row->rating);
+              $nostars = 5 - $stars;
+              for($i=0;$i<$stars;$i++)
+              {
+                echo "<span class='glyphicon glyphicon-star'></span>";
+              }
+              for($j=0;$j<$nostars;$j++)
+              {
+                echo "<span class='glyphicon glyphicon-star-empty'></span>";
+              }
+              ?>
               <p><?php echo $row->comment; ?></p>
               <hr />
              <?php 
@@ -134,8 +146,19 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://demos.maxoffsky.com/shop-reviews/js/starrr.js"></script>
+    <script src="http://demos.maxoffsky.com/shop-reviews/js/expanding.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    $(function(){
+      var ratingsField = $('#ratings-hidden');
+      $('.starrr').on('starrr:change', function(e, value){
+        ratingsField.val(value);
+      });
+    });
+  </script>
     <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <!--<script src="../../assets/js/vendor/holder.min.js"></script>-->

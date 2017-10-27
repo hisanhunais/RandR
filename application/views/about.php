@@ -31,6 +31,14 @@
     <![endif]-->
 
     <!-- Custom styles for this template -->
+<style>
+  #pto{
+    height:110px;
+    width:200px;
+  }
+
+</style>
+
     <link href="<?php echo base_url(); ?>css/carousel.css" rel="stylesheet">
   </head>
 
@@ -48,14 +56,14 @@
        <div class="row">
         <div class="col-md-4">
           <h2>Our Story</h2>
-          <img src="<?php echo base_url()?>images/cake.jpg" alt="Story">
+          <img src="<?php echo base_url()?>images/cake.jpg" alt="Story" id="pto">
           <p>R&R was etablished on ....<br/>
             by Mr....,the founder of R&R<br/>
             sweets.</p>
         </div>
         <div class="col-md-4">
           <h2>Our Achievements</h2>
-          <img src="<?php echo base_url()?>images/award.jpg" alt="Story">
+          <img src="<?php echo base_url()?>images/award.jpg" alt="Story" id="pto">
           <p>Our biggest achivement is <br/>
           our beloved customers.</p><br/>
           <p>other than that we won</p>
@@ -65,7 +73,7 @@
         </div>
         <div class="col-md-4">
           <h2>Administrtion</h2>
-          <img src="<?php echo base_url()?>images/team.jpg" alt="Story">
+          <img src="<?php echo base_url()?>images/team.jpg" alt="Story" id="pto">
           <ul>
             <li>Mr.... : Manager</li>
           </ul>
