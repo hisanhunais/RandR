@@ -38,6 +38,44 @@
     
     <?php include 'navigationbar.php'; ?>
     
+    <div class="container">  
+      <div class="jumbotron">
+              <hr>
+             <h3>About</h3>
+              <hr>
+          </div>
+
+       <div class="row">
+        <div class="col-md-4">
+          <h2>Our Story</h2>
+          <img src="<?php echo base_url()?>images/cake.jpg" alt="Story">
+          <p>R&R was etablished on ....<br/>
+            by Mr....,the founder of R&R<br/>
+            sweets.</p>
+        </div>
+        <div class="col-md-4">
+          <h2>Our Achievements</h2>
+          <img src="<?php echo base_url()?>images/award.jpg" alt="Story">
+          <p>Our biggest achivement is <br/>
+          our beloved customers.</p><br/>
+          <p>other than that we won</p>
+          <ul>
+           <li> award for best selling sweet product</li>
+          </ul> 
+        </div>
+        <div class="col-md-4">
+          <h2>Administrtion</h2>
+          <img src="<?php echo base_url()?>images/team.jpg" alt="Story">
+          <ul>
+            <li>Mr.... : Manager</li>
+          </ul>
+        </div>
+       </div>   
+    </div>   
+
+
+
+
 
 
       
