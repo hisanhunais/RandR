@@ -33,7 +33,7 @@
     <!-- Custom styles for this template -->
 <style>
   #pto{
-    height:120px;
+    height:110px;
     width:200px;
   }
 
@@ -42,7 +42,7 @@
     <link href="<?php echo base_url(); ?>css/carousel.css" rel="stylesheet">
   </head>
 
-  <body style="background:#f4f4f4;">
+  <body>
     
     <?php include 'navigationbar.php'; ?>
     

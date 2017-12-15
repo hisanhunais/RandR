@@ -1,0 +1,10 @@
+diff a/application/views/about.php b/application/views/about.php	(rejected hunks)
+@@ -33,7 +33,7 @@
+     <!-- Custom styles for this template -->
+ <style>
+   #pto{
+-    height:110px;
++    height:120px;
+     width:200px;
+   }
+ 

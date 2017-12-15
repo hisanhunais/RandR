@@ -35,7 +35,7 @@
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body style="background:#f4f4f4;">
+  <body>
     <div class="navbar-wrapper">
       <div class="container">
 
@@ -68,6 +68,10 @@
                     <li><a href="#">One more separated link</a></li>
                   </ul>
                 </li>-->
+                </ul>
+               <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="<?php echo site_url('Login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
               </ul>
             </div>
           </div>
@@ -110,11 +114,11 @@
         <div class="item">
           <img class="third-slide" src="images/slide3.jpg" alt="Third slide">
           <div class="container">
-            <!--<div class="carousel-caption">
+            <div class="carousel-caption">
               <h1>One more for good measure.</h1>
               <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-            </div>-->
+            </div>
           </div>
         </div>
       </div>

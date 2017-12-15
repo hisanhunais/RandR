@@ -86,14 +86,12 @@
 
 	
     <!-- Placed at the end of the document so the pages load faster -->
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"
   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>-->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  crossorigin="anonymous"></script>
     <script src="<?php echo base_url(); ?>js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>js/jquery.js"></script>
   </body>
 </html>
 
@@ -116,7 +114,7 @@
 					<input type="number" name="item_price" id="item_price" class="form-control" required="" />
 					<br>
 					<!--<label>Image</label>
-					<input type="file" name="file_name" id="item_image" />-->
+					<input type="file" name="item_image" id="item_image" />-->
 				</div>
 				<div class="modal-footer">
 					<input type="submit" name="submit" value="Submit" class="btn main-color-bg" />
@@ -134,15 +132,15 @@
 			var itemName = $('#item_name').val();
 			var itemDescription = $('#item_description').val();
 			var itemPrice = $('#item_price').val();
-			//var extension = $('#item_image').val().split('.').pop().toLowerCase();
-			//var itemImage = $('#item_image').val();
+			var extension = $('#item_image').val().split('.').pop().toLowerCase();
+			var itemImage = $('#item_image').val();
 			var sendData = $('#add_item_form').serialize();
-			/*if(jQuery.inArray(extension, ['png','jpg','jpeg']) == -1)
+			if(jQuery.inArray(extension, ['png','jpg','jpeg']) == -1)
 			{
 				alert("Invalid Image File");
 				$('#item_image').val('');
 				return false;
-			}*/
+			}
 
 			/*$.ajax({
 				url:"<?php echo base_url() . 'index.php/Admin/add_item' ?>",
@@ -169,8 +167,7 @@
 					alert(data);
 					$('#add_item_form')[0].reset();
 					$('#addItem').modal('hide');
-				}
-				
+				} 
 			});
 		});
 	});

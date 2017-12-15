@@ -49,6 +49,10 @@ switch($this->uri->segment(2,"home")) {
                 <li class="<?php echo $menuActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/menu">Menu</a></li>
                 <li class="<?php echo $contactActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/contact">Contact</a></li> 
               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="<?php echo site_url('Login'); ?>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+              </ul>
             </div>
           </div>
         </nav>
