@@ -42,7 +42,7 @@
     <link href="<?php echo base_url(); ?>css/carousel.css" rel="stylesheet">
   </head>
 
-  <body>
+  <body style="background:#f4f4f4;">
     
     <?php include 'navigationbar.php'; ?>
     

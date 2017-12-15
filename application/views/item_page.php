@@ -39,7 +39,7 @@
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body>
+  <body style="background:#f4f4f4;">
     
     <?php include 'navigationbar.php'; ?>
 
@@ -54,7 +54,7 @@
               ?>
               <div class="col-md-12">
                 <div class="thumbnail">
-                  <img src="http://placehold.it/820x320" alt="">
+                  <img src="<?php echo base_url(); ?><?php echo $row->image; ?>" onerror="this.src='http://placehold.it/820x320'" alt="http://placehold.it/820x320">
                   <div class="caption-full">
                     <h4 class="pull-right">Rs.<?php echo $row->price; ?></h4>
                     <h4><?php echo $row->name; ?></h4>

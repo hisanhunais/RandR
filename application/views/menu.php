@@ -18,6 +18,8 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link href="<?php echo base_url(); ?>css/adminStyle.css" rel="stylesheet">
 	
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
@@ -37,16 +39,16 @@
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body>
+  <body style="background:#f4f4f4;">
     
     <?php include 'navigationbar.php'; ?>
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
+        <div class="col-sm-5 col-sm-offset-2">
           <div id="imaginary_container"> 
             <div class="input-group stylish-input-group">
-              <input type="text" class="form-control"  placeholder="Search"   id="search" >
+              <input type="text" class="form-control searchBox"  placeholder="Search"   id="search" >
               <span class="input-group-addon">
               <button type="submit">
               <!--<i class="fa fa-search" aria-hidden="true"></i>-->
@@ -60,16 +62,16 @@
       </div>
 
       <div class="row" style="margin-top: 10px;">
-        <div class = "col-md-12" id="loadSection">
+        <div class = "col-md-9" id="loadSection">
           <div class="panel">
             <div class="panel-body" id="itemContent"> 
               <?php 
                 foreach($fetch_data->result() as $row)
                 {
               ?>
-              <div class="col-sm-4 col-lg-4 col-md-4">
+              <div class="col-sm-4 col-lg-4 col-md-4" id="oneitem">
                 <div class="thumbnail">
-                  <img src="http://placehold.it/320x150" alt="">
+                  <img src="<?php echo base_url(); ?><?php echo $row->image; ?>" onerror="this.src='http://placehold.it/320x150'" alt="http://placehold.it/320x150">
                   <div class="caption">
                     <h4 class="pull-right">Rs.<?php echo $row->price; ?></h4>
                     <h4><a href="<?php echo base_url(); ?>index.php/Welcome/menu_item/<?php echo $row->itemID; ?>"><?php echo $row->name; ?></a></h4>
@@ -90,6 +92,18 @@
               <?php
                 }
               ?>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="panel">
+            <div class="panel-heading">
+              <h3 class="panel-title">Cart</h3>
+             </div>
+            </div>
+            <div class="panel-body">
+              <h3>Cart is Empty</h3>
             </div>
           </div>
         </div>  
@@ -126,7 +140,7 @@
         <?php } ?>
        </div>
         </div>-->
-      </div>
+    </div>
 
       
 
@@ -190,3 +204,22 @@
       });
   });
 </script>-->
+
+<script>
+  $(document).ready(function(){
+    $('.searchBox').on('keyup',function(){
+      var searchVal = $(this).val().toLowerCase();
+      $('#itemContent #oneitem').each(function(){
+        var trVal = $(this).text().toLowerCase();
+        if(trVal.indexOf(searchVal) === -1)
+        {
+          $(this).hide();
+        }
+        else
+        {
+          $(this).show();
+        }
+      });
+    });
+  });
+</script>
