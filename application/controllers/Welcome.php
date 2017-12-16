@@ -214,7 +214,7 @@ class Welcome extends CI_Controller {
 		}
 
 		$data = array(
-			"ordID" => "ORD2",
+			"ordID" => "ORD3",
 			"customerID" => "CUS1",
 			"date" => date("Y-m-d"),
 			"total" => $this->cart->total(),
@@ -229,7 +229,7 @@ class Welcome extends CI_Controller {
 		foreach($this->cart->contents() as $items)
 		{
 			$orderdata = array(
-				"ordID"	=> "ORD2",
+				"ordID"	=> "ORD3",
 				"itemID" =>	$items["id"],
 				"quantity" => $items["qty"],
 				"itemTotal" => $items["subtotal"],

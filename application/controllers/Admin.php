@@ -17,7 +17,40 @@ class Admin extends CI_Controller {
 
 	public function orders()
 	{
-		$this->load->view('admin/orders');
+		$this->load->model("main_model");
+		$data["fetch_orderlist"] = $this->main_model->get_orders();
+		$this->load->view('admin/orders',$data);
+	}
+
+	public function order_details()
+	{
+		$orderno = $_POST['orderno'];
+		$this->load->model("order_processing");
+		$fetch_orderdetailslist = $this->order_processing->get_order_details($orderno);
+
+		$output = '';
+		$output .= '
+			<div class= "table-responsive">
+				<table class="table table-bordered">
+					<tr>
+						<td>Item</td>
+						<td>Quantity</td>
+					</tr>';
+					foreach($fetch_orderdetailslist as $row)
+					{
+						$output .= '
+							<tr>
+								<td>'.$row->name.'</td>
+								<td>'.$row->quantity.'</td>
+							</tr>
+						';
+					}
+
+		$output .= '		
+				</table>
+			</div>
+		';
+		echo $output;
 	}
 
 	public function customers()
@@ -50,4 +83,6 @@ class Admin extends CI_Controller {
 			return $new_name;
 		}
 	}
+
+
 }

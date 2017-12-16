@@ -63,7 +63,7 @@
       </div>
 
       <div class="row" style="margin-top: 10px;">
-        <div class = "col-md-12" id="loadSection">
+        <div class = "col-md-9" id="loadSection">
           <div class="panel">
             <div class="panel-body" id="itemContent"> 
               <?php 

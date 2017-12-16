@@ -8,19 +8,14 @@ class Order_processing extends CI_Model
 		return $query;
 	}
 
-	function get_item_details($id)
+	function get_order_details($id)
 	{
-		//$this->get->where("itemID",$id);
-		//$query = $this->db->get("item");
-
 		$this->db->select('*');
-		$this->db->from('item');
-		$this->db->where('itemID',$id);
+		$this->db->from('order_details');
+		$this->db->join('item', 'order_details.itemID = item.itemID');
+		$this->db->where('ordID',$id);
 		$query = $this->db->get();
-
-		/*$this->db->select('*');
-		$query = $this->db->get_where('item','itemID',$id);*/
-		return $query;
+		return $query->result();
 	}
 
 	function get_item_reviews($id)
