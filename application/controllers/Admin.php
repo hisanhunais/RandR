@@ -27,31 +27,15 @@ class Admin extends CI_Controller {
 
 	public function add_item()
 	{
-		$dd = $this->input->post('item_name');
-
-		$dd1 = $this->input->post('item_description');
-		$dd2 = $this->input->post('item_price');
-		//$d = $this->input->post('item_image');
-		//echo $d;
-		
-		/*if(isset($_FILES["item_image"]['name']))
-		{
-			echo "Ok";
-		} 
-		else
-		{
-			echo "No";
-		}*/
 			$insert_data = array(
-				'name'	=> $this->input->post('item_name'),
-				'description'	=> $this->input->post('item_description'),
-				'price'	=> $this->input->post('item_price'),
-				'image'	=> "image"
+				'item_name'	=> $this->input->post('item_name'),
+				'item_description'	=> $this->input->post('item_description'),
+				'item_price'	=> $this->input->post('item_price'),
+				'item_image'	=> "image"
 			);
 			$this->load->model("main_model");
 			$this->main_model->insert_item($insert_data);
 			echo "Data Inserted";
-			
 		
 	}
 

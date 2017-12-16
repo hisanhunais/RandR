@@ -21,8 +21,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-  <link href="<?php echo base_url(); ?>css/adminStyle.css" rel="stylesheet">
 	
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!--<link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">-->
@@ -42,16 +40,16 @@
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body style="background:#f4f4f4;">
+  <body>
     
     <?php include 'navigationbar.php'; ?>
 
     <div class="container">
       <div class="row">
-        <div class="col-sm-5 col-sm-offset-2">
+        <div class="col-sm-6 col-sm-offset-3">
           <div id="imaginary_container"> 
             <div class="input-group stylish-input-group">
-              <input type="text" class="form-control searchBox"  placeholder="Search"   id="search" >
+              <input type="text" class="form-control"  placeholder="Search"   id="search" >
               <span class="input-group-addon">
               <button type="submit">
               <!--<i class="fa fa-search" aria-hidden="true"></i>-->
@@ -65,7 +63,7 @@
       </div>
 
       <div class="row" style="margin-top: 10px;">
-        <div class = "col-md-9" id="loadSection">
+        <div class = "col-md-12" id="loadSection">
           <div class="panel">
             <div class="panel-body" id="itemContent"> 
               <?php 
@@ -161,7 +159,7 @@
         <?php } ?>
        </div>
         </div>-->
-    </div>
+      </div>
 
       
 
