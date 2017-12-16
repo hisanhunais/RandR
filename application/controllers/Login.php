@@ -13,34 +13,47 @@ class Login extends CI_Controller {
 	  	$this->load->helper('url');
 	  	$this->load->model('User');
 	    $this->load->library('session');
+	    $this->load->library('form_validation');
 	 
 	}
 
     public function index() {
-        $this->load->view('login');
+    	if (!isset($this->session->userdata['user_name'])){
+        	$this->load->view('login');
+    	} else {
+    		redirect('');
+    	}
     }
 
     function login_user(){
+    	$this->form_validation->set_rules('username', 'Username', 'required|valid_email');
 	  $user_login=array(
 	 
 	  'username'=>$this->input->post('username'),
 	  'password'=>md5($this->input->post('password'))
 	 
 	    );
+
+	  if ($this->form_validation->run() != FALSE){
 	 
 	    $data=$this->User->login_user($user_login['username'],$user_login['password']);
 
           if($data)
 	      {
 	        $this->session->set_userdata('user_name',$data['username']);
-	        $this->load->view('home');
+	        //$this->load->view('home');
+	        redirect('');
 	      }
 
 	      else{
 	        $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
-	        $this->load->view("login");
-	 
+	        redirect('Login');	
 	      }
+	  } else {
+	  		$erorrs = validation_errors();
+	  		$this->session->set_flashdata('error_msg', $erorrs);
+	        redirect('Login');
+	  }
  
  
 	}

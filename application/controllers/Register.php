@@ -18,12 +18,19 @@ class Register extends CI_Controller {
 	}
 
     public function index() {
-    	$this->form_validation->set_rules('username', 'Username', 'required|valid_email');
-        $this->load->view('register');
+    	if (!isset($this->session->userdata['user_name'])){
+        	$this->load->view('register');
+    	} else {
+    		redirect('');
+    	}
     }
 
     public function register_user(){
- 
+ 		$this->form_validation->set_rules('username', 'Username', 'required|valid_email');
+    	$this->form_validation->set_rules('firstname','First Name', 'required');
+    	$this->form_validation->set_rules('lastname', 'Last Name', 'required');
+    	$this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
+    	$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
       	$user=array(
       	'username'=>$this->input->post('username'),
       	'firstname'=>$this->input->post('firstname'),
@@ -33,15 +40,15 @@ class Register extends CI_Controller {
  
 		$email_check=$this->User->email_check($user['username']);
 		
-		if($email_check){
+		if($email_check && $this->form_validation->run() != FALSE){
 		  $this->User->register_user($user);
 		  $this->session->set_flashdata('success_msg', 'Registered successfully.Now login to your account.');
 		  redirect('Login');
 		 
 		}
 		else{
-		 
-		  $this->session->set_flashdata('error_msg', 'Error occured,Try again.');
+		  $erorrs = validation_errors();
+		  $this->session->set_flashdata('error_msg', $erorrs);
 		  redirect('Register');
 		 
 		 
