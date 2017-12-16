@@ -20,6 +20,10 @@
 
   <link href="<?php echo base_url(); ?>css/adminStyle.css" rel="stylesheet">
 
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRM5CCp0gytfOJaxkwmqxDmyy6-FPPIws"></script>
+<style type="text/css">
+          #map{ width:700px; height: 500px; }
+        </style>
 
     <!-- Custom styles for this template -->
     <link href="<?php echo base_url(); ?>css/carousel.css" rel="stylesheet">
@@ -66,6 +70,61 @@
         </div>
       </div>
 
+      <div class="row">
+        <form method="post" class="myform" action="<?php echo base_url();?>index.php/Welcome/addorder">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Date</span>
+            <input type="date" class="form-control" placeholder="Required Date" name="requiredDate" id="requiredDate" aria-describedby="basic-addon1" required="">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Time</span>
+            <input type="time" class="form-control" placeholder="Required Time" name="requiredTime" id="requiredTime" aria-describedby="basic-addon1" required="">
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon">
+              <input type="checkbox" id="delivery" name="deliveryRequired" id="deliveryRequired" value="Yes">
+            </span>
+            <input type="text" class="form-control" placeholder="Delivery Required" aria-describedby="basic-addon1" readonly>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="deliverydetails" style="/*display: none;*/">
+        <center>
+          
+        <div>
+        
+          <h2>Select Location</h2>
+        
+          <p>Click on a location on the map to select it. Drag the marker to change location.</p>
+            
+            <!--map div-->
+            <div id="map"></div>
+
+            <!--our form-->
+            <h2>Chosen Location</h2>
+            
+                <input type="text" id="lat" name="lat" readonly="yes" class="form-control" required><br>
+                <input type="text" id="lng" name="lng" readonly="yes" class="form-control" required><br>
+                <a href = "index.php"><input type="button" id="back_btn" value="Back"/></a>
+                
+            
+          
+          </div>
+          <input name="submit" type="submit" id="submitLoc" value="Confirm Order" class="btn btn-primary" />
+          </center>
+          </form>
+          
+            
+      </div>
+
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
@@ -74,8 +133,22 @@
 
     </div><!-- /.container -->
 
-
+    <script type="text/javascript" src="<?php echo base_url(); ?>js/map.js"></script>
   </body>
 </html>
+
+<script>
+$(document).ready(function(){
+$('#delivery').click(function() {
+    if( $(this).is(':checked')) {
+        $("#deliverydetails").show();
+    } else {
+        $("#deliverydetails").hide();
+    }
+});    
+});
+
+
+</script>
 
 

@@ -173,7 +173,7 @@ class Welcome extends CI_Controller {
 		</table>
 		';
 
-		$output .= '<center><a href="'.base_url().'index.php/Welcome/checkout"><button type="button" name = "checkout" id="'.$items["rowid"].'" class="btn btn-primary btn-sm checkout">Proceed to Checkout</button></a></center></div>';
+		$output .= '<center><a href="'.base_url().'index.php/Welcome/checkout"><button type="button" name = "checkout" class="btn btn-primary btn-sm checkout">Proceed to Checkout</button></a></center></div>';
 
 		if($count == 0)
 		{
@@ -187,5 +187,49 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->library('cart');
 		$this->load->view('checkout');
+	}
+
+	public function addorder()
+	{
+		$this->load->library('cart');
+		$this->load->model('order_processing');
+		$deliveryReq = "";
+
+		if(isset($_POST['deliveryRequired']))
+		{
+			$deliveryReq = "Yes";
+		}
+		else
+		{
+			$deliveryReq = "No";
+		}
+
+		$data = array(
+			"ordID" => "ORD2",
+			"customerID" => "CUS1",
+			"date" => date("Y-m-d"),
+			"total" => $this->cart->total(),
+			"requiredDate" => $_POST['requiredDate'],
+			"requiredTime" => $_POST['requiredTime'],
+			"deliveryRequired" => $deliveryReq,
+			"status" => "Pending"
+		);
+
+		$this->order_processing->insert_order($data);
+
+		foreach($this->cart->contents() as $items)
+		{
+			$orderdata = array(
+				"ordID"	=> "ORD2",
+				"itemID" =>	$items["id"],
+				"quantity" => $items["qty"],
+				"itemTotal" => $items["subtotal"],
+			);
+
+			$this->order_processing->insert_orderdetails($orderdata);
+		}
+
+		$this->cart->destroy();
+		$this->menu();
 	}
 }
