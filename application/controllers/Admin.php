@@ -5,7 +5,12 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('admin/home');
+		$this->load->model("main_model");
+		$data['pendingCount'] = $this->main_model->getPendingCount();
+		$data['readyCount'] = $this->main_model->getReadyCount();
+		$data['userCount'] = $this->main_model->getUserCount();
+		$data['itemCount'] = $this->main_model->getItemCount();
+		$this->load->view('admin/home',$data);
 	}
 
 	public function items()
@@ -22,6 +27,13 @@ class Admin extends CI_Controller {
 		$data["fetch_readyorderlist"] = $this->main_model->get_orders("Ready");
 		$data["fetch_completeorderlist"] = $this->main_model->get_orders("Completed");
 		$this->load->view('admin/orders',$data);
+	}
+
+	public function customers()
+	{
+		$this->load->model("main_model");
+		$data["fetch_customerlist"] = $this->main_model->get_customers();
+		$this->load->view('admin/customers',$data);
 	}
 
 	public function order_details()
@@ -79,11 +91,6 @@ class Admin extends CI_Controller {
 		$this->order_processing->update_order_dates($orderno,$reqDate,$reqTime);
 		$this->orders();
 	}
-
-	public function customers()
-	{
-		$this->load->view('admin/customers');
-	}	
 
 	public function add_item()
 	{

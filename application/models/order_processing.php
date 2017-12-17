@@ -103,5 +103,7 @@ class Order_processing extends CI_Model
 	{
 		$this->db->insert('delivery', $data);
 	}
+
+	
 }
 ?>

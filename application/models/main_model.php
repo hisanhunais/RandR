@@ -17,6 +17,12 @@ class Main_model extends CI_Model
 		return $query;
 	}
 
+	function get_customers()
+	{
+		$query = $this->db->get("user");
+		return $query;
+	}
+
 	function get_item_details($id)
 	{
 		//$this->get->where("itemID",$id);
@@ -76,6 +82,37 @@ class Main_model extends CI_Model
 	function insert_item_review($data)
 	{
 		$this->db->insert('item_review', $data);
+	}
+
+	function getPendingCount()
+	{
+		$this->db->select("COUNT(*) AS pendingcount");
+		$this->db->from("order_master");
+		$this->db->where("status", "Pending");
+		return $this->db->get();
+		
+	}
+
+	function getReadyCount()
+	{
+		$this->db->select("COUNT(*) AS readycount");
+		$this->db->from("order_master");
+		$this->db->where("status", "Ready");
+		return $this->db->get();
+	}
+
+	function getUserCount()
+	{
+		$this->db->select("COUNT(*) AS usercount");
+		$this->db->from("user");
+		return $this->db->get();
+	}
+
+	function getItemCount()
+	{
+		$this->db->select("COUNT(*) AS itemcount");
+		$this->db->from("item");
+		return $this->db->get();
 	}
 }
 ?>

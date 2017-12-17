@@ -10,9 +10,9 @@
 
     <title>Admin | R and R</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url(); ?>css/bootstrap.min.css" rel="stylesheet">
-	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link href="<?php echo base_url(); ?>css/adminStyle.css" rel="stylesheet">
  
   </head>
@@ -30,14 +30,67 @@
 	            </div>
 				<div class="col-md-9">
 					<div class="panel panel-default">
-						<!--<div class="panel-heading main-color-bg">
-							<h3 class="panel-title">Home Buyer</h3>
-							
-						  </div>-->
+						<div class="panel-heading main-color-bg">
+							<h3 class="panel-title main-color-bg">Home</h3>
+						</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class = "col-md-12" id="loadSection">
-									<!--<img src="../../Images/farmfinancetopheader" width="100%">-->
+									<div class="col-md-3">
+				                    	<div class ="well dash-box" style="text-align: center;">
+				                        	<h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
+				                        		<?php 
+				                        			foreach($userCount->result() as $row)
+				                        			{
+				                        				echo $row->usercount;
+				                        			}
+				                        		 ?>
+				                        	</h2>
+				                        	<h4> Users </h4><h6>Currently registered</h6>
+				                      	</div>
+				                    </div>
+
+				                    <div class="col-md-3">
+				                    	<div class ="well dash-box" style="text-align: center;">
+				                    		<h2><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+				                    			<?php 
+				                        			foreach($pendingCount->result() as $row)
+				                        			{
+				                        				echo $row->pendingcount;
+				                        			}
+				                        		 ?>
+				                    		</h2>
+				                    		<h4> Orders </h4><h6>Currently Pending</h6>
+				                     	</div>
+				                    </div>
+
+				                    <div class="col-md-3">
+				                    	<div class ="well dash-box" style="text-align: center;">
+				                       		<h2><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+				                       			<?php 
+				                        			foreach($readyCount->result() as $row)
+				                        			{
+				                        				echo $row->readycount;
+				                        			}
+				                        		 ?>
+				                       		</h2>
+				                        	<h4> Orders </h4><h6>Currently Ready</h6>
+				                      	</div>
+				                    </div>
+
+				                    <div class="col-md-3">
+				                    	<div class ="well dash-box" style="text-align: center;">
+				                       		<h2><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
+				                       			<?php 
+				                        			foreach($itemCount->result() as $row)
+				                        			{
+				                        				echo $row->itemcount;
+				                        			}
+				                        		 ?>
+				                       		</h2>
+				                        	<h4> Items </h4><h6>Currently Available</h6>
+				                      	</div>
+				                    </div>
 								</div>
 							</div>
 						</div>
@@ -49,9 +102,5 @@
 
 <?php //include 'footer.php'; ?>
 
-	
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
