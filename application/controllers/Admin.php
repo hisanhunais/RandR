@@ -27,30 +27,55 @@ class Admin extends CI_Controller {
 		$orderno = $_POST['orderno'];
 		$this->load->model("order_processing");
 		$fetch_orderdetailslist = $this->order_processing->get_order_details($orderno);
+		$fetch_order = $this->order_processing->get_order($orderno);
+
+		foreach($fetch_order as $row2)
+		{
+			$date = $row2->requiredDate;
+			$time = $row2->requiredTime;
+		}
 
 		$output = '';
 		$output .= '
-			<div class= "table-responsive">
-				<table class="table table-bordered">
-					<tr>
-						<td>Item</td>
-						<td>Quantity</td>
-					</tr>';
-					foreach($fetch_orderdetailslist as $row)
-					{
-						$output .= '
-							<tr>
-								<td>'.$row->name.'</td>
-								<td>'.$row->quantity.'</td>
-							</tr>
-						';
-					}
+				<div class= "table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<td>Item</td>
+							<td>Quantity</td>
+						</tr>';
+						foreach($fetch_orderdetailslist as $row)
+						{
+							$output .= '
+								<tr>
+									<td>'.$row->name.'</td>
+									<td>'.$row->quantity.'</td>
+								</tr>
+							';
+						}
 
 		$output .= '		
-				</table>
-			</div>
+					</table>
+				</div>
+				
+					<label>Required Date</label>
+					<input type="date" name="update_date" id="update_date" class="form-control" value='.$date.'>					
+					<br>
+					<label>Required Time</label>
+					<input type="time" name="update_time" id="update_time" class="form-control" value='.$time.'>					
+					<br>
+					<input type="hidden" name="updateOrderno" id="updateOrderno" value='.$orderno.'>	
 		';
 		echo $output;
+	}
+
+	public function update_order()
+	{
+		$orderno = $_POST['updateOrderno'];
+		$reqDate = $_POST['update_date'];
+		$reqTime = $_POST['update_time'];
+		$this->load->model("order_processing");
+		$this->order_processing->update_order_dates($orderno,$reqDate,$reqTime);
+		$this->orders();
 	}
 
 	public function customers()
@@ -82,6 +107,15 @@ class Admin extends CI_Controller {
 			move_uploaded_file($_FILES['item_image']['tmp_name'], $destination);
 			return $new_name;
 		}
+	}
+
+	public function complete_order()
+	{
+		$orderno = $_POST['completedata'];
+		$status = "Completed";
+		$this->load->model("order_processing");
+		$this->order_processing->update_order_status($orderno,$status);
+		$this->orders();
 	}
 
 
