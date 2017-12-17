@@ -18,7 +18,9 @@ class Admin extends CI_Controller {
 	public function orders()
 	{
 		$this->load->model("main_model");
-		$data["fetch_orderlist"] = $this->main_model->get_orders();
+		$data["fetch_pendingorderlist"] = $this->main_model->get_orders("Pending");
+		$data["fetch_readyorderlist"] = $this->main_model->get_orders("Ready");
+		$data["fetch_completeorderlist"] = $this->main_model->get_orders("Completed");
 		$this->load->view('admin/orders',$data);
 	}
 
@@ -109,10 +111,16 @@ class Admin extends CI_Controller {
 		}
 	}
 
-	public function complete_order()
+	public function update_order_status($status)
 	{
-		$orderno = $_POST['completedata'];
-		$status = "Completed";
+		if(isset($_POST['completedata']))
+		{
+			$orderno = $_POST['completedata'];
+		}
+		elseif(isset($_POST['readydata']))
+		{
+			$orderno = $_POST['readydata'];
+		}
 		$this->load->model("order_processing");
 		$this->order_processing->update_order_status($orderno,$status);
 		$this->orders();

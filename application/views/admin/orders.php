@@ -31,47 +31,126 @@
 				<div class="col-md-9">
 					<div class="panel panel-default">
 						<div class="panel-heading main-color-bg">
-							<h3 class="panel-title main-color-bg">Orders</h3>
-							
-						 </div>
+							<h3 class="panel-title main-color-bg">Orders</h3>							
+						</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class = "col-md-12" id="loadSection">
-									<div class="table-responsive">
-										<table class="table table-bordered" id="item_table">
-											<thead>
-												<tr>
-													<td width="20%">Customer</td>
-													<td width="20%">Total (Rs)</td>
-													<td width="10%">Required Date</td>
-													<td width="10%">Required Time</td>
-													<td width="10%">Status</td>
-													<td width="10%"></td>
-													<td width="10%"></td>
-													<td width="10%"></td>
-												</tr>
-											</thead>
-											<tbody>
-											<?php 
-                								foreach($fetch_orderlist->result() as $row)
-                								{
-              								?>
-              									<tr>
-              										<td width="20%"><?php echo $row->customerID; ?></td>
-													<td width="20%"><?php echo $row->total; ?></td>
-													<td width="10%"><?php echo $row->requiredDate; ?></td>
-													<td width="10%"><?php echo $row->requiredTime; ?></td>
-													<td width="10%" class="alert alert-danger"><?php echo $row->status; ?></td>
-													<td width="10%"><input type="button" name="view" value="View Details" id="<?php echo $row->ordID; ?>" class="view_details btn btn-info btn-xs" /></td>
-													<td width="10%"><input type="button" name="complete" value="Complete Order" id="<?php echo $row->ordID; ?>" class="complete_order btn btn-primary btn-xs" /></td>
-													<td width="10%"><input type="button" name="cancel" value="Cancel Order" id="<?php echo $row->ordID; ?>" class="cancel_order btn btn-danger btn-xs" /></td>
-              									</tr> 
-              								<?php 
-              									}
-              								?> 
-              								</tbody>
-										</table>
-									</div>
+									<ul class="nav nav-tabs">
+									  <li class="active"><a data-toggle="tab" href="#pending">Pending</a></li>
+									  <li><a data-toggle="tab" href="#ready">Ready</a></li>
+									  <li><a data-toggle="tab" href="#completed">Completed</a></li>
+									</ul>
+									<div class="tab-content" id="orderTabs">
+									<br>
+								  		<div id="pending" class="tab-pane fade in active">
+											<div class="table-responsive">
+												<table class="table table-bordered" id="item_table">
+													<thead>
+														<tr>
+															<td width="20%">Customer</td>
+															<td width="20%">Total (Rs)</td>
+															<td width="10%">Required Date</td>
+															<td width="10%">Required Time</td>
+															<td width="10%">Status</td>
+															<td width="10%"></td>
+															<td width="10%"></td>
+															<td width="10%"></td>
+														</tr>
+													</thead>
+													<tbody>
+													<?php 
+		                								foreach($fetch_pendingorderlist->result() as $row)
+		                								{
+		              								?>
+		              									<tr>
+		              										<td width="20%"><?php echo $row->customerID; ?></td>
+															<td width="20%"><?php echo $row->total; ?></td>
+															<td width="10%"><?php echo $row->requiredDate; ?></td>
+															<td width="10%"><?php echo $row->requiredTime; ?></td>
+															<td width="10%" class="alert alert-danger"><?php echo $row->status; ?></td>
+															<td width="10%"><input type="button" name="view" value="View Details" id="<?php echo $row->ordID; ?>" class="view_details btn btn-info btn-xs" /></td>
+															<td width="10%"><input type="button" name="ready" value="Ready Order" id="<?php echo $row->ordID; ?>" class="ready_order btn btn-primary btn-xs" /></td>
+															<td width="10%"><input type="button" name="cancel" value="Cancel Order" id="<?php echo $row->ordID; ?>" class="cancel_order btn btn-danger btn-xs" /></td>
+		              									</tr> 
+		              								<?php 
+		              									}
+		              								?> 
+		              								</tbody>
+												</table>
+											</div>
+										</div>
+
+										<div id="ready" class="tab-pane fade">
+											<div class="table-responsive">
+												<table class="table table-bordered" id="item_table">
+													<thead>
+														<tr>
+															<td width="20%">Customer</td>
+															<td width="20%">Total (Rs)</td>
+															<td width="10%">Required Date</td>
+															<td width="10%">Required Time</td>
+															<td width="10%">Status</td>
+															<td width="10%"></td>
+															<td width="10%"></td>
+														</tr>
+													</thead>
+													<tbody>
+													<?php 
+		                								foreach($fetch_readyorderlist->result() as $row2)
+		                								{
+		              								?>
+		              									<tr>
+		              										<td width="20%"><?php echo $row2->customerID; ?></td>
+															<td width="20%"><?php echo $row2->total; ?></td>
+															<td width="10%"><?php echo $row2->requiredDate; ?></td>
+															<td width="10%"><?php echo $row2->requiredTime; ?></td>
+															<td width="10%" class="alert alert-success"><?php echo $row2->status; ?></td>
+															<td width="10%"><input type="button" name="view" value="View Details" id="<?php echo $row2->ordID; ?>" class="view_details btn btn-info btn-xs" /></td>
+															<td width="10%"><input type="button" name="complete" value="Complete Order" id="<?php echo $row2->ordID; ?>" class="complete_order btn btn-primary btn-xs" /></td>
+		              									</tr> 
+		              								<?php 
+		              									}
+		              								?> 
+		              								</tbody>
+												</table>
+											</div>
+										</div>
+
+										<div id="completed" class="tab-pane fade">
+											<div class="table-responsive">
+												<table class="table table-bordered" id="item_table">
+													<thead>
+														<tr>
+															<td width="20%">Customer</td>
+															<td width="20%">Total (Rs)</td>
+															<td width="10%">Required Date</td>
+															<td width="10%">Required Time</td>
+															<td width="10%">Status</td>
+															<td width="10%"></td>
+														</tr>
+													</thead>
+													<tbody>
+													<?php 
+		                								foreach($fetch_completeorderlist->result() as $row3)
+		                								{
+		              								?>
+		              									<tr>
+		              										<td width="20%"><?php echo $row3->customerID; ?></td>
+															<td width="20%"><?php echo $row3->total; ?></td>
+															<td width="10%"><?php echo $row3->requiredDate; ?></td>
+															<td width="10%"><?php echo $row3->requiredTime; ?></td>
+															<td width="10%" class="alert alert-info"><?php echo $row3->status; ?></td>
+															<td width="10%"><input type="button" name="view" value="View Details" id="<?php echo $row3->ordID; ?>" class="view_details btn btn-info btn-xs" /></td>
+		              									</tr> 
+		              								<?php 
+		              									}
+		              								?> 
+		              								</tbody>
+												</table>
+											</div>
+										</div>
+									</div>		
 								</div>
 							</div>
 						</div>
@@ -94,6 +173,27 @@
 					<div class="modal-footer"">
 						<input type="submit" name="submit" value="Update" id="update" class="btn main-color-bg"/>
 						<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div id="readyOrder" class="modal fade">
+		<div class="modal-dialog">
+			<form method="post" id="ready_order_form">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Ready Order</h4>
+					</div>
+					<div class="modal-body">
+						<p>Are you sure you want to make this Order Ready?</p>
+						<input type="hidden" name="readydata" id="readydata">
+					</div>
+					<div class="modal-footer">
+						<input type="submit" name="submit" value="Ready" id="ready" class="btn main-color-bg" />
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 					</div>
 				</div>
 			</form>
@@ -156,13 +256,36 @@
 		$('#complete_order_form').on('submit',function(event){
 			event.preventDefault();
 			$.ajax({
-				url:"<?php echo base_url() . 'index.php/Admin/complete_order' ?>",
+				url:"<?php echo base_url() . 'index.php/Admin/update_order_status/Completed' ?>",
 				method:"POST",
 				data:$('#complete_order_form').serialize(),
 				success:function(data)
 				{
 					$('#complete_order_form')[0].reset();
 					$('#completeOrder').modal('hide');
+					$('#pageBody').html(data);
+				}
+			});
+		});
+
+		// When ready order button is clicked, this method set the hidden field of confirmation message modal with the order number
+		$(document).on('click', '.ready_order', function(){
+			var ready_ordID = $(this).attr("id");
+			$('#readydata').val(ready_ordID);
+			$('#readyOrder').modal('show');
+		});
+
+		// When submit button of confirmation message modal is clicked, this method will be called
+		$('#ready_order_form').on('submit',function(event){
+			event.preventDefault();
+			$.ajax({
+				url:"<?php echo base_url() . 'index.php/Admin/update_order_status/Ready' ?>",
+				method:"POST",
+				data:$('#ready_order_form').serialize(),
+				success:function(data)
+				{
+					$('#ready_order_form')[0].reset();
+					$('#readyOrder').modal('hide');
 					$('#pageBody').html(data);
 				}
 			});

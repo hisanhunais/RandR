@@ -8,11 +8,11 @@ class Main_model extends CI_Model
 		return $query;
 	}
 
-	function get_orders()
+	function get_orders($status)
 	{
 		$this->db->select('*');
 		$this->db->from('order_master');
-		$this->db->where('status',"Pending");
+		$this->db->where('status',$status);
 		$query = $this->db->get();
 		return $query;
 	}
