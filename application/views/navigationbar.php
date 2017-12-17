@@ -29,8 +29,6 @@ switch($this->uri->segment(2,"home")) {
 ?>
 
 <!--<div class="navbar-wrapper">-->
-      <div class="container">
-
         <nav class="navbar navbar-inverse">
           <div class="container">
             <div class="navbar-header">
@@ -49,9 +47,22 @@ switch($this->uri->segment(2,"home")) {
                 <li class="<?php echo $menuActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/menu">Menu</a></li>
                 <li class="<?php echo $contactActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/contact">Contact</a></li> 
               </ul>
+               <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span><?php
+                if (isset($this->session->userdata['user_name'])) {
+                 echo " ".$this->session->userdata['user_name'];
+                } else{
+                  echo " Sign up";
+                }?></a></li>
+                <li><a href="<?php echo site_url('Login/user_logout'); ?>"><span class="glyphicon glyphicon-log-in"></span><?php
+                if (isset($this->session->userdata['user_name'])) {
+                 echo " Logout";
+                } else{
+                  echo " Login In";
+                }?></a></li>
+              </ul>
             </div>
           </div>
         </nav>
 
-      </div>
     <!--</div>-->

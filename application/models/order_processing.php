@@ -1,6 +1,6 @@
 <?php
 
-class Main_model extends CI_Model
+class Order_processing extends CI_Model
 {
 	function get_items()
 	{
@@ -8,28 +8,14 @@ class Main_model extends CI_Model
 		return $query;
 	}
 
-	function get_orders()
+	function get_order_details($id)
 	{
 		$this->db->select('*');
-		$this->db->from('order_master');
-		$this->db->where('status',"Pending");
+		$this->db->from('order_details');
+		$this->db->join('item', 'order_details.itemID = item.itemID');
+		$this->db->where('ordID',$id);
 		$query = $this->db->get();
-		return $query;
-	}
-
-	function get_item_details($id)
-	{
-		//$this->get->where("itemID",$id);
-		//$query = $this->db->get("item");
-
-		$this->db->select('*');
-		$this->db->from('item');
-		$this->db->where('itemID',$id);
-		$query = $this->db->get();
-
-		/*$this->db->select('*');
-		$query = $this->db->get_where('item','itemID',$id);*/
-		return $query;
+		return $query->result();
 	}
 
 	function get_item_reviews($id)
@@ -76,6 +62,21 @@ class Main_model extends CI_Model
 	function insert_item_review($data)
 	{
 		$this->db->insert('item_review', $data);
+	}
+
+	function insert_order($data)
+	{
+		$this->db->insert('order_master', $data);
+	}
+
+	function insert_orderdetails($data)
+	{
+		$this->db->insert('order_details', $data);
+	}
+ 
+	function insert_delivery($data)
+	{
+		$this->db->insert('delivery', $data);
 	}
 }
 ?>

@@ -54,7 +54,7 @@
               ?>
               <div class="col-md-12">
                 <div class="thumbnail">
-                  <img src="http://placehold.it/820x320" alt="">
+                  <img src="<?php echo base_url(); ?><?php echo $row->image;?>" onerror="this.src='http://placehold.it/820x320'" alt="Image">
                   <div class="caption-full">
                     <h4 class="pull-right">Rs.<?php echo $row->price; ?></h4>
                     <h4><?php echo $row->name; ?></h4>

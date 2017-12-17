@@ -33,7 +33,7 @@
     <!-- Custom styles for this template -->
 <style>
   #pto{
-    height:120px;
+    height:110px;
     width:200px;
   }
 

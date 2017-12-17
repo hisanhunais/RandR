@@ -32,7 +32,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading main-color-bg">
 							<h3 class="panel-title main-color-bg">Items</h3>
-						 </div>
+						</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class = "col-md-12" id="loadSection">
@@ -113,8 +113,8 @@
 					<label>Price</label>
 					<input type="number" name="item_price" id="item_price" class="form-control" required="" />
 					<br>
-					<label>Image</label>
-					<input type="file" name="item_image" id="item_image" />
+					<!--<label>Image</label>
+					<input type="file" name="item_image" id="item_image" />-->
 				</div>
 				<div class="modal-footer">
 					<input type="submit" name="submit" value="Submit" class="btn main-color-bg" />
