@@ -94,28 +94,46 @@ class Admin extends CI_Controller {
 
 	public function add_item()
 	{
-			$insert_data = array(
-				'item_name'	=> $this->input->post('item_name'),
-				'item_description'	=> $this->input->post('item_description'),
-				'item_price'	=> $this->input->post('item_price'),
-				'item_image'	=> "image"
-			);
-			$this->load->model("main_model");
-			$this->main_model->insert_item($insert_data);
-			echo "Data Inserted";
-		
+		$img = $this->upload_image();
+		$imgname =  $img['file_name'];
+		$insert_data = array(
+			'itemID'	=> 'ITEM08',
+			'name'	=> $this->input->post('item_name'),
+			'description'	=> $this->input->post('item_description'),
+			'price'	=> $this->input->post('item_price'),
+			'image'	=> "images/".$imgname
+		);
+		$this->load->model("main_model");
+		$this->main_model->insert_item($insert_data);		
 	}
 
 	function upload_image()
 	{
-		if(isset($_FILES["item_image"]))
+		if(isset($_FILES["userfile"]["name"]))
 		{
-			$extension = explode('.', $_FILES['item_image']['name']);
-			$new_name = rand() . '.' . $extension[1];
-			$destination = './images/' . $new_name;
-			move_uploaded_file($_FILES['item_image']['tmp_name'], $destination);
-			return $new_name;
+			$config['upload_path'] = './images/';
+			$config['allowed_types'] = 'jpg|jpeg|png';
+			$this->load->library('upload',$config);
+
+			if($this->upload->do_upload('userfile'))
+			{
+				$data = $this->upload->data();
+				return $data;
+			}
+			// $extension = explode('.', $_FILES['userfile']['name']);
+			// $new_name = rand() . '.' . $extension[1];
+			// $destination = './images/' . $new_name;
+			// move_uploaded_file($_FILES['item_image']['tmp_name'], $destination);
+			// return $new_name;
 		}
+	}
+
+	public function delete_item()
+	{
+		$itemID = $_POST['deletedata'];
+		$this->load->model("main_model");
+		$this->main_model->delete_item($itemID);
+
 	}
 
 	public function update_order_status($status)

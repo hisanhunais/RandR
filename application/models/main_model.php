@@ -84,6 +84,12 @@ class Main_model extends CI_Model
 		$this->db->insert('item_review', $data);
 	}
 
+	function delete_item($id)
+	{
+		$this->db->where('itemID', $id);
+		$this->db->delete('item');
+	}
+
 	function getPendingCount()
 	{
 		$this->db->select("COUNT(*) AS pendingcount");
