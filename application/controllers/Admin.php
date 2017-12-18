@@ -97,7 +97,6 @@ class Admin extends CI_Controller {
 		$img = $this->upload_image();
 		$imgname =  $img['file_name'];
 		$insert_data = array(
-			'itemID'	=> 'ITEM08',
 			'name'	=> $this->input->post('item_name'),
 			'description'	=> $this->input->post('item_description'),
 			'price'	=> $this->input->post('item_price'),
@@ -133,7 +132,16 @@ class Admin extends CI_Controller {
 		$itemID = $_POST['deletedata'];
 		$this->load->model("main_model");
 		$this->main_model->delete_item($itemID);
+	}
 
+	public function update_item()
+	{
+		echo "Hi";
+		// $itemID = $_POST['itemID'];
+		// echo $itemID;
+		// $this->load->model("main_model");
+		// $result = $this->main_model->get_update_item($itemID);
+		// echo json_encode($result);	
 	}
 
 	public function update_order_status($status)
@@ -150,6 +158,7 @@ class Admin extends CI_Controller {
 		$this->order_processing->update_order_status($orderno,$status);
 		$this->orders();
 	}
+
 
 
 }

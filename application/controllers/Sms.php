@@ -1,266 +1,101 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Sms extends CI_Controller {
+/*
+* Requirements: your PHP installation needs cUrl support, which not all PHP installations
+* include by default.
+*
+* Simply substitute your own username, password and phone number
+* below, and run the test code:
+*/
+$username = 'KushalNaresh';
+$password = 'kush@123';
+/*
+* Your phone number, including country code, i.e. +44123123123 in this case:
+*/
+//$msisdn = '+94768526186';
 
-	public function __construct(){
-	 
-	    parent::__construct();
-	  	$this->load->helper('url');
-	  	$this->load->model('User');
-	    $this->load->library('session');
-	 
-	}
+/*
+* Please see the FAQ regarding HTTPS (port 443) and HTTP (port 80/5567)
+*/
+$url = 'https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0';
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
-	public function index()
-	{
-		$this->load->view('home');
-	}
+/*
+* A 7-bit GSM SMS message can contain up to 160 characters (longer messages can be
+* achieved using concatenation).
+*
+* All non-alphanumeric 7-bit GSM characters are included in this example. Note that Greek characters,
+* and extended GSM characters (e.g. the caret "^"), may not be supported
+* to all networks. Please let us know if you require support for any characters that
+* do not appear to work to your network.
+*/
+//$seven_bit_msg = "Test message: all non-alphanumeric GSM characters: $@!\"#%&,;:<>¡£¤¥§¿ÄÅÆÇÉÑÖØÜßàèéùìòå¿äöñüà\nGreek: ΩΘΔΦΓΛΩΠΨΣΘΞ";
 
-	public function about()
-	{
-		$this->load->view('about');
-	}
+/*
+* A Unicode SMS can contain only 70 characters. Any Unicode character can be sent,
+* including those GSM and accented ISO-8859 European characters that are not
+* catered for by the GSM character set, but note that mobile phones are only able
+* to display certain Unicode characters, based on their geographic market.
+* Nonetheless, every mobile phone should be able to display at least the text
+* "Unicode test message:" from the test message below. Your browser may be able to
+* display more of the characters than your phone. The text of the message below is:
+*/
+//$unicode_msg = "Unicode test message: ☺ \nArabic: شصض\nChinese: 本网";
 
-	public function admin()
-	{
-		$this->load->view('admin/home');
-	}
+/*
+* There are a number of 8 bit messages that one can send to a handset, the most popular of the lot is Service Indication(Wap Push).
+* Some other popular ones are vCards and vCalendars, headers may vary depending on which of message one opts to send.
+* The User Data Header(UDH) is solely responsible for determining which
+* type of messages will be sent to one's handset.
+* In a nutshell, SI(service indication) messages will have, in the final message body, both the UDH
+* and WSP(Wireless Session Protocol) appended to each other forming a prefix of the ASCII string of the Hex value
+* of the actual content. For example, suppose our intended Wap message body is as follows:
+*
+* <si><indication href="http://www.bulksms.com">Visit BulkSMS.com homepage</indication></si>
+*
+* Our headers will be -- UDH + WSP = FINAL_HEADER
+* '0605040B8423F0' + 'DC0601AE' = '0605040B8423F0DC0601AE'
+*
+* The UDH contains a destination port(0B84) and the origin port(23F0)
+* the WSP is broken down into the following:
+*
+* DC - Transaction ID (used to associate PDUs)
+* 06 - PDU type (push PDU)
+* 01 - HeadersLen (total of content-type and headers, i.e. zero headers)
+* AE - Content Type: application/vnd.wap.sic
+*
+* For this example our 8 bit message(what becomes our Wap Push) will look like this:
+* $msg = '0605040B8423F0DC0601AE02056a0045c60d0362756c6b736d732e636f6d00010356697369742042756c6b534d532e636f6d20686f6d6570616765000101';
+*
+* You will only get UDH for both vCard and vCalendar type of 8 bit messages and no WSP, which will look something to this effect:
+* '06050423F4000'
+*
+* In order to convert an xml document into its binary representation (wbxml), one would need to install a wbxml library (libwbxml)
+* Once that has been successfully achieved, that binary representation will then be finally converted into its hexadecimal value
+* in order to complete the transaction. With that done, the appropriate headers are then appended to this hex string to complete
+* the Wap Push/8-bit messaging
+*
+* $eight_bit_msg = get_headers( $msg_type ) . xml_to_wbxml( $msg_body );
+* get_headers(...) function commented out. uncomment when you use it.
+* $msg_type = 'wap_push';
+* $msg_body = '<si><indication href="http://www.bulksms.com">Visit BulkSMS.com homepage</indication></si>';
+*/
+//$eight_bit_msg = '0605040B8423F0DC0601AE02056a0045c60d0362756c6b736d732e636f6d00010356697369742042756c6b534d532e636f6d20686f6d6570616765000101';
 
-	public function myorders()
-	{
-		$this->load->model("main_model");
-		$username = $this->session->userdata['user_name'];
-		$data["fetch_pendingorderlist"] = $this->main_model->get_customer_orders("Pending",$username);
-		$data["fetch_readyorderlist"] = $this->main_model->get_customer_orders("Ready",$username);
-		$data["fetch_completeorderlist"] = $this->main_model->get_customer_orders("Completed",$username);
-		$this->load->view('myorders',$data);
-	}
 
-
-	public function menu()
-	{
-		$this->load->model("main_model");
-		$data["fetch_data"] = $this->main_model->get_items();
-		$this->load->view('menu',$data);
-	}
-
-	public function menu_item($id)
-	{
-		$this->load->model("main_model");
-		$data["fetch_item"] = $this->main_model->get_item_details($id);
-		$data["fetch_reviews"] = $this->main_model->get_item_reviews($id);
-		$this->load->view('item_page',$data);
-	}
-
-	public function menu_item_byname()
-	{
-		/*$output = array();
-		$this->load->model("main_model");
-		$data = $this->main_model->get_item_byname($_POST['searchData']);
-
-		foreach ($data as $row) 
-		{
-			$output['name'] = $row->name;
-			$output['description'] = $row->description;
-			$output['price'] = $row->price;
-			$output['image'] = $row->image;
-		}
-
-		echo json_encode($output);*/
-		$this->load->model("main_model");
-		$search = $this->input->post('search');
-		$output = $this->main_model->get_item_byname($search);
-		echo json_encode($output);
-	}
-
-	public function contact()
-	{
-		$this->load->view('contact');
-	}
-
-	public function add_reviews()
-	{
-		$this->load->model('main_model');
-
-		$data = array(
-			"reviewID" => "REV30",
-			"itemID" => "ITEM01",
-			"username" => "Nimal",
-			"date" => date("Y-m-d"),
-			"time" => date("h:i:sa"),
-			"comment" => $this->input->post("comment"),
-			"rating" => $this->input->post("rating")
-		);
-
-		$this->main_model->insert_item_review($data);
-		$this->menu_item("ITEM01");
-	}
-
-	public function add()
-	{
-		$this->load->library("cart");
-		$data = array(
-			"id"		=> $_POST["itemID"],
-			"name"		=> $_POST["name"],
-			"qty"		=> $_POST["quantity"],
-			"price"		=> $_POST["price"]
-		);
-		$this->cart->insert($data);	//insert data into cart and return rowid
-		echo $this->viewcart();
-	}
-
-	public function load()
-	{
-		echo $this->viewcart();
-	}
-
-	public function remove()
-	{
-		$this->load->library("cart");
-		$row_id = $_POST['row_id'];
-		$data = array(
-			'rowid'		=> $row_id,
-			'qty'		=> 0
-		);
-		$this->cart->update($data);
-		echo $this->viewcart();
-	}
-
-	public function clear()
-	{
-		$this->load->library("cart");
-		$this->cart->destroy();
-		echo $this->viewcart();
-	}
-
-	public function viewcart()
-	{
-		$this->load->library("cart");
-		$output = '';
-		$output .= '
-			<div>
-				<div align="right">
-					<button type="button" id="clear_cart" class="btn btn-warning">Clear Cart</button>
-				</div>
-				<br>
-				<table class="table table-striped">
-					<tr>
-						<th width="40%">Item</th>
-						<th width="15%">Quantity</th>
-						<th width="15%">Price</th>
-						<th width="15%">Total</th>
-						<th width="15%">Action</th>
-					</tr>
-			</div>
-		';
-		$count = 0;
-		foreach($this->cart->contents() as $items)
-		{
-			$count++;
-			$output .= '
-				<tr>
-					<td>'.$items["name"].'</td>
-					<td>'.$items["qty"].'</td>
-					<td>'.$items["price"].'</td>
-					<td>'.$items["subtotal"].'</td>
-					<td><button type="button" name = "remove" id="'.$items["rowid"].'" class="btn btn-danger btn-xs remove_inventory">Remove</button></td>
-				</tr>
-			';
-		}
-
-		$output .= '
-			<tr>
-				<td colspan="4" align="right">Total</td>
-				<td>'.$this->cart->total().'</td>
-			</tr>
-		</table>
-		';
-
-		$output .= '<center><a href="'.base_url().'index.php/Welcome/checkout"><button type="button" name = "checkout" class="btn btn-primary btn-sm checkout">Proceed to Checkout</button></a></center></div>';
-
-		if($count == 0)
-		{
-			$output = '<h3 align="center">Cart is Empty</h3>';
-		}
-
-		return $output;
-	}
-
-	public function checkout()
-	{
-		$this->load->library('cart');
-		$this->load->view('checkout');
-	}
-
-	public function addorder()
-	{
-		$this->load->library('cart');
-		$this->load->model('order_processing');
-		$this->load->model('main_model');
-		$deliveryReq = "";
-		$username = $username = $this->session->userdata['user_name'];
-
-		if(isset($_POST['deliveryRequired']))
-		{
-			$deliveryReq = "Yes";
-		}
-		else
-		{
-			$deliveryReq = "No";
-		}
-
-		$data = array(
-			"customerUsername" => $username,
-			"date" => date("Y-m-d"),
-			"total" => $this->cart->total(),
-			"requiredDate" => $_POST['requiredDate'],
-			"requiredTime" => $_POST['requiredTime'],
-			"deliveryRequired" => $deliveryReq,
-			"status" => "Pending"
-		);
-
-		$this->order_processing->insert_order($data);
-		$ordercount = $this->main_model->getOrdersCount();
-		$count = $ordercount->ordID;
-		// foreach($ordercount as $row2)
-		// {
-		// 	$count = $row2->orderscount;
-		// }
-
-		foreach($this->cart->contents() as $items)
-		{
-			$orderdata = array(
-				"ordID"	=> $count,
-				"itemID" =>	$items["id"],
-				"quantity" => $items["qty"],
-				"itemTotal" => $items["subtotal"],
-			);
-
-			$this->order_processing->insert_orderdetails($orderdata);
-		}
-
-		
-
-		$this->cart->destroy();
-		$this->menu();
-	}
-
+/*
+* These error codes will be retried if encountered. For your final application,
+* you may wish to include statuses such as "25: You do not have sufficient credits"
+* in this list, and notify yourself upon such errors. However, if you are writing a
+* simple application which does no queueing (e.g. a Web page where a user simply
+* POSTs a form back to the page that will send the message), then you should not
+* add anything to this list (perhaps even removing the item below), and rather just
+* display an error to your user immediately.
+*/
+$transient_errors = array(
+40 => 1 # Temporarily unavailable
+);
 
 /*
 * Sending 7-bit message
@@ -279,9 +114,6 @@ else {
 */
 function initializer()
 {
-  $username = 'KushalNaresh';
-  $password = 'kush@123';
-  $url = 'https://bulksms.vsms.net/eapi/submission/send_sms/2/2.0';
   $this->load->model("main_model");
   $result = $this->main_model->getAdminNumber();
   $admintel = $result->phonenumber;
@@ -552,3 +384,4 @@ function xml_to_wbxml( $msg_body ) {
   return $wbxml;
 }
 }
+?>

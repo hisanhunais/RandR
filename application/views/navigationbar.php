@@ -1,7 +1,7 @@
 <?php
 
 // Initializing variables.
-$homeActive =  $aboutActive = $contactActive = $menuActive = '';
+$homeActive =  $aboutActive = $contactActive = $menuActive = $myActive = '';
 $active = "active";
 
 switch($this->uri->segment(2,"home")) {
@@ -19,6 +19,10 @@ switch($this->uri->segment(2,"home")) {
 
     case 'menu':
         $menuActive = $active;
+    break;
+
+    case 'myorders':
+        $myActive = $active;
     break;
 
     // By default, we assume you will be at index.php (setting $homeActive).
@@ -46,6 +50,14 @@ switch($this->uri->segment(2,"home")) {
                 <li class="<?php echo $aboutActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/about">About</a></li>
                 <li class="<?php echo $menuActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/menu">Menu</a></li>
                 <li class="<?php echo $contactActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/contact">Contact</a></li> 
+                <?php
+                  if(isset($this->session->userdata['user_name']))
+                  {
+                ?>
+                <li class="<?php echo $myActive;?>"><a href="<?php echo base_url(); ?>index.php/Welcome/myorders">My Orders</a></li> 
+                <?php    
+                  }
+                ?>
               </ul>
                <ul class="nav navbar-nav navbar-right">
                 <li><a href="<?php echo site_url('Register'); ?>"><span class="glyphicon glyphicon-user"></span><?php

@@ -64,7 +64,7 @@
 		                								{
 		              								?>
 		              									<tr>
-		              										<td width="20%"><?php echo $row->customerID; ?></td>
+		              										<td width="20%"><?php echo $row->customerUsername; ?></td>
 															<td width="20%"><?php echo $row->total; ?></td>
 															<td width="10%"><?php echo $row->requiredDate; ?></td>
 															<td width="10%"><?php echo $row->requiredTime; ?></td>
@@ -101,7 +101,7 @@
 		                								{
 		              								?>
 		              									<tr>
-		              										<td width="20%"><?php echo $row2->customerID; ?></td>
+		              										<td width="20%"><?php echo $row2->customerUsername; ?></td>
 															<td width="20%"><?php echo $row2->total; ?></td>
 															<td width="10%"><?php echo $row2->requiredDate; ?></td>
 															<td width="10%"><?php echo $row2->requiredTime; ?></td>
@@ -136,7 +136,7 @@
 		                								{
 		              								?>
 		              									<tr>
-		              										<td width="20%"><?php echo $row3->customerID; ?></td>
+		              										<td width="20%"><?php echo $row3->customerUsername; ?></td>
 															<td width="20%"><?php echo $row3->total; ?></td>
 															<td width="10%"><?php echo $row3->requiredDate; ?></td>
 															<td width="10%"><?php echo $row3->requiredTime; ?></td>
@@ -263,7 +263,8 @@
 				{
 					$('#complete_order_form')[0].reset();
 					$('#completeOrder').modal('hide');
-					$('#pageBody').html(data);
+					location.reload();
+					// $('#pageBody').html(data);
 				}
 			});
 		});
@@ -286,7 +287,8 @@
 				{
 					$('#ready_order_form')[0].reset();
 					$('#readyOrder').modal('hide');
-					$('#pageBody').html(data);
+					location.reload();
+					// $('#pageBody').html(data);
 				}
 			});
 		});
@@ -302,7 +304,8 @@
 				{
 					$('#update_order_form')[0].reset();
 					$('#orderDetailsModal').modal('hide');
-					$('#pageBody').html(data);
+					location.reload();
+					// $('#pageBody').html(data);
 				}
 			});
 		});

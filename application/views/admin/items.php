@@ -147,13 +147,13 @@
 				</div>
 				<div class="modal-body">
 					<label>Item Name</label>
-					<input type="text" name="item_name1" id="item_name1" class="form-control" readonly="true" />					
+					<input type="text" name="item_name1" id="item_name1" class="form-control"/>					
 					<br>
 					<label>Description</label>
-					<input type="number" name="item_qty1" id="item_qty1" class="form-control" readonly="true" />
+					<input type="number" name="item_description1" id="item_description1" class="form-control"/>
 					<br>
 					<label>Price (Rs)</label>
-					<input type="number" name="item_price1" id="item_price1" class="form-control" required="" />
+					<input type="number" name="item_price1" id="item_price1" class="form-control"/>
 					<br>
 					<!--<label>Image</label>
 					<input type="file" name="file_name" id="item_image" />-->
@@ -260,24 +260,31 @@
 		});
 
 		$(document).on('click', '.edit_data', function(){
-			var paddyID = $(this).attr("id");
-			$.ajax({
-				url:"fetch_stock.php",
-				method:"POST",
-				data:{paddyID:paddyID},
-				dataType:"json",
-				success:function(data)
-				{
-					$('#item_name1').val(data.Paddy_type);
-					$('#item_qty1').val(data.Paddy_quantity);
-					$('#item_qty2').val(0);
-					$('#item_price1').val(data.Paddy_price);
-					//$('#item_price').val(data.Paddy_price);
-					$('#paddyID1').val(data.Paddy_ID);
-					$('#editStock').modal('show');
-				}
+			var itemID1 = $(this).attr("id");
+			$('#editItem').modal('show');
+			// $.ajax({
+			// 	url:"<?php echo base_url() . 'index.php/Admin/update_item' ?>",
+			// 	method:"POST",
+			// 	data:{itemID1:itemID1},
+			// 	dataType:"json",
+			// 	contentType: false,
+			// 	cache: false,
+			// 	processData:false,
+			// 	success:function(data)
+			// 	{
+			// 		//$('#itemBody').html(data);
+			// 		// $('#item_name1').val(data.name);
+			// 		// $('#item_description1').val(data.description);
+			// 		// $('#item_price1').val(data.price);
+			// 		// $('#updatedata').val(data.itemID);
+			// 		 $('#editItem').modal('show');
+			// 	}
+			// 	error: function (jqXHR, textStatus, errorThrown)
+   //      {
+   //          alert('Error get data from ajax');
+   //      }
 
-			});
+			// });
 		});
 
 		$('#edit_stock_form').on('submit',function(event){

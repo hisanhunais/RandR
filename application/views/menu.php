@@ -79,13 +79,30 @@
                     <p><?php echo $row->description;?></p>
                   </div>
                   <div class="ratings">
-                    <p class="pull-right">15 reviews</p>
-                    <p>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
-                      <span class="glyphicon glyphicon-star"></span>
+                    <!-- <p class="pull-right">
+                    <?php 
+                      // foreach($reviewCount->result() as $row)
+                      // {
+                      //   // $this->load->model("main_model");
+                      //   // $this->get_item_reviews($row->)
+                      //   // echo $row->reviewcount;
+                      // }
+                      ?>
+                    reviews</p>
+                    <p> -->
+                      <?php
+                      $stars = round($row->rating);
+                      $nostars = 5 - $stars;
+                      for($i=0;$i<$stars;$i++)
+                      {
+                        echo "<span class='glyphicon glyphicon-star'></span>";
+                      }
+                      for($j=0;$j<$nostars;$j++)
+                      {
+                        echo "<span class='glyphicon glyphicon-star-empty'></span>";
+                      }
+                      echo "  ".$row->rating." stars";
+                      ?>
                     </p>
                   </div>
                   <center>

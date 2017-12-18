@@ -17,6 +17,16 @@ class Main_model extends CI_Model
 		return $query;
 	}
 
+	function get_customer_orders($status,$id)
+	{
+		$this->db->select('*');
+		$this->db->from('order_master');
+		$array = array('status' => $status, 'customerUsername' => $id);
+		$this->db->where($array);
+		$query = $this->db->get();
+		return $query;
+	}
+
 	function get_customers()
 	{
 		$query = $this->db->get("user");
@@ -90,6 +100,15 @@ class Main_model extends CI_Model
 		$this->db->delete('item');
 	}
 
+	function get_update_item($id)
+	{
+		$this->db->select('*');
+		$this->db->from('item');
+		$this->db->where('itemID',$id);
+		$query = $this->db->get();
+		return $query->row();
+	}
+
 	function getPendingCount()
 	{
 		$this->db->select("COUNT(*) AS pendingcount");
@@ -119,6 +138,29 @@ class Main_model extends CI_Model
 		$this->db->select("COUNT(*) AS itemcount");
 		$this->db->from("item");
 		return $this->db->get();
+	}
+
+	function getReviewCount()
+	{
+		$this->db->select("COUNT(*) AS reviewcount");
+		$this->db->from("item_review");
+		$this->db->where("itemID", "Ready");
+		return $this->db->get();
+	}
+
+	function getOrdersCount()
+	{
+		$this->db->select("*");
+		$this->db->from("order_master");
+		return $this->db->get()->last_row();
+	}
+
+	function getAdminNumber()
+	{
+		$this->db->select("*");
+		$this->db->from("user");
+		$this->db->where("type", "Admin");
+		return $this->db->get()->row();
 	}
 }
 ?>
