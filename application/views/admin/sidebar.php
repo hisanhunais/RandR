@@ -1,7 +1,7 @@
 <?php
 
 // Initializing variables.
-$homeActive =  $itemsActive = $ordersActive = $customersActive = '';
+$homeActive =  $itemsActive = $ordersActive = $messagesActive = $customersActive = '';
 $active = "active main-color-bg";
 
 switch($this->uri->segment(2,"home")) {
@@ -21,6 +21,10 @@ switch($this->uri->segment(2,"home")) {
         $customersActive = $active;
     break;
 
+	case 'messages':
+        $messagesActive = $active;
+    break;
+	
     // By default, we assume you will be at index.php (setting $homeActive).
     //default:
     //    $homeActive = $active;
@@ -37,4 +41,10 @@ switch($this->uri->segment(2,"home")) {
     <a href="<?php echo base_url(); ?>index.php/Admin/items" class="list-group-item <?php echo $itemsActive; ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Items</a>
     <a href="<?php echo base_url(); ?>index.php/Admin/orders" class="list-group-item <?php echo $ordersActive; ?>"><span class="glyphicon glyphicon-plane" aria-hidden="true"></span> Orders</a>
     <a href="<?php echo base_url(); ?>index.php/Admin/customers" class="list-group-item <?php echo $customersActive; ?>"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> Customer</a>
+
+	<a href="<?php echo base_url(); ?>index.php/Admin/messages" class="list-group-item <?php echo $messagesActive; ?>"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Messages</a>
+
+
+	
+	
 </div>

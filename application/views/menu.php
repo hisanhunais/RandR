@@ -15,7 +15,10 @@
     <!-- Bootstrap core CSS -->
     <!--<link href="../../dist/css/bootstrap.min.css" rel="stylesheet">-->
 	<!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet">-->
-	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
@@ -60,16 +63,16 @@
       </div>
 
       <div class="row" style="margin-top: 10px;">
-        <div class = "col-md-12" id="loadSection">
+        <div class = "col-md-9" id="loadSection">
           <div class="panel">
             <div class="panel-body" id="itemContent"> 
               <?php 
                 foreach($fetch_data->result() as $row)
                 {
               ?>
-              <div class="col-sm-4 col-lg-4 col-md-4">
+              <div class="col-md-4" id="oneitem">
                 <div class="thumbnail">
-                  <img src="<?php echo base_url(); ?><?php echo $row->image;?>" onerror="this.src='http://placehold.it/320x150'" alt="Image">
+                  <img class="img-thumbnail" src="<?php echo base_url(); ?><?php echo $row->image; ?>" onerror="this.src='http://placehold.it/320x150'" alt="http://placehold.it/320x150">
                   <div class="caption">
                     <h4 class="pull-right">Rs.<?php echo $row->price; ?></h4>
                     <h4><a href="<?php echo base_url(); ?>index.php/Welcome/menu_item/<?php echo $row->itemID; ?>"><?php echo $row->name; ?></a></h4>
@@ -85,6 +88,17 @@
                       <span class="glyphicon glyphicon-star"></span>
                     </p>
                   </div>
+                  <center>
+                  <input type="number" name="quantity" class="quantity" id="<?php echo $row->itemID.'q'; ?>">
+                  <input type="hidden" name="name" value="<?php echo $row->name; ?>" id="<?php echo $row->itemID.'n'; ?>">
+                  <input type="hidden" name="name" value="<?php echo $row->price; ?>" id="<?php echo $row->itemID.'p'; ?>">
+                  <!-- <input type="hidden" name="name" value="<?php echo $row->name; ?>" id="<?php echo $row->itemID; ?>"> -->
+                  <?php
+                  //echo '<button type="button" name="add_cart" class="btn btn-success add_cart" data-name = "'.$row->name.'" data-price = "'.$row->price.'" data-itemID = "'.$row->itemID.'">Add to Cart</button>';
+                  ?>
+                  <button type="button" name="add_cart" class="btn btn-success add_cart" id="<?php echo $row->itemID; ?>">Add to Card</button>
+                  <!-- <button type="button" name="add_cart" class="btn btn-success add_cart" data-name = "<?php echo $row->name; ?>" data-price = "<?php echo $row->price; ?>" data-itemID = "<?php echo $row->itemID; ?>">Add to Cart</button> -->
+                  </center>
                 </div>
               </div>
               <?php
@@ -92,7 +106,26 @@
               ?>
             </div>
           </div>
-        </div>  
+        </div>
+
+        <!-- <div class="col-md-3">
+          <div class="panel">
+            <div class="panel-heading">
+              <h3 class="panel-title">Cart</h3>
+             </div>
+            </div>
+            <div class="panel-body" id="cart_details">
+              <h3>Cart is Empty</h3>
+            </div>
+          </div>
+        </div> --> 
+
+        <div class="col-md-3">
+          <div id="cart_details">
+            <h3 align="center">Cart is Empty</h3>
+          </div>
+        </div>
+
       </div>  
       
 
@@ -146,9 +179,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
     <!--<script src="../../dist/js/bootstrap.min.js"></script>-->
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <!--<script src="../../assets/js/vendor/holder.min.js"></script>-->
@@ -190,3 +223,95 @@
       });
   });
 </script>-->
+
+<script>
+  $(document).ready(function(){
+    $('.searchBox').on('keyup',function(){
+      var searchVal = $(this).val().toLowerCase();
+      $('#itemContent #oneitem').each(function(){
+        var trVal = $(this).text().toLowerCase();
+        if(trVal.indexOf(searchVal) === -1)
+        {
+          $(this).hide();
+        }
+        else
+        {
+          $(this).show();
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function(){
+    $('.add_cart').click(function(){
+      var itemID = $(this).attr("id");
+      var name = $('#' + itemID + 'n').val();
+      var price = $('#' + itemID + 'p').val();
+      var quantity = $('#' + itemID + 'q').val();
+
+      if(quantity != '' && quantity > 0)
+      {
+        $.ajax({
+          url:"<?php echo base_url(); ?>/index.php/Welcome/add",
+          method: "POST",
+          data:{itemID:itemID,name:name,price:price,quantity:quantity},
+          success:function(data)
+          {
+            //alert("Item added to Cart");
+            $('#cart_details').html(data);
+            $('#' + itemID + 'q').val('');
+          }
+        });
+      }
+      else
+      {
+        alert("Please Enter a Valid Quantity");
+      }
+    });
+
+    $('#cart_details').load("<?php echo base_url(); ?>index.php/Welcome/load");
+
+    $(document).on('click','.remove_inventory',function(){
+      var row_id = $(this).attr("id");
+      if(confirm("Are you sure you want to remove this item?"))
+      {
+        $.ajax({
+          url:"<?php echo base_url(); ?>index.php/Welcome/remove",
+          method:"POST",
+          data:{row_id:row_id},
+          success:function(data)
+          {
+            //alert("Item removed from Cart");
+            $('#cart_details').html(data);
+          }
+        });
+      }
+      else
+      {
+        return false;
+      }
+    });
+  
+
+  $(document).on('click','#clear_cart',function(){
+      var row_id = $(this).attr("id");
+      if(confirm("Are you sure you want to clear cart?"))
+      {
+        $.ajax({
+          url:"<?php echo base_url(); ?>index.php/Welcome/clear",
+          success:function(data)
+          {
+            //alert("Your cart has been cleared.");
+            $('#cart_details').html(data);
+          }
+        });
+      }
+      else
+      {
+        return false;
+      }
+    });
+  });
+</script>
