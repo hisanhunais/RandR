@@ -11,7 +11,7 @@ class Model_message extends CI_Model{
 			'message'=> $this->input->post('message'),
 
 			);
-		retuen $this->db->insert('message',$data);
+		return $this->db->insert('message',$data);
 	}
 	
 }

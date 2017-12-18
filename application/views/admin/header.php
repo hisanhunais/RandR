@@ -1,7 +1,7 @@
 <?php
 
 // Initializing variables.
-$homeActive =  $itemsActive = $ordersActive = $customersActive = '';
+$homeActive =  $itemsActive = $ordersActive = $messagesActive = $customersActive = '';
 $active = "active";
 
 switch($this->uri->segment(2,"home")) {
@@ -20,6 +20,11 @@ switch($this->uri->segment(2,"home")) {
     case 'customers':
         $customersActive = $active;
     break;
+	
+	case 'messages':
+        $messagesActive = $active;
+    break;
+
 
     // By default, we assume you will be at index.php (setting $homeActive).
     //default:
@@ -49,6 +54,9 @@ switch($this->uri->segment(2,"home")) {
 					<li class="<?php echo $itemsActive; ?>"><a href="<?php echo base_url(); ?>index.php/Admin/items">Items</a></li>
 					<li class="<?php echo $ordersActive; ?>"><a href="<?php echo base_url(); ?>index.php/Admin/orders">Orders</a></li>
 					<li class="<?php echo $customersActive; ?>"><a href="<?php echo base_url(); ?>index.php/Admin/customers">Customers</a></li>
+					<li class="<?php echo $messagesActive; ?>"><a href="<?php echo base_url(); ?>index.php/Admin/messages">messages</a></li>
+					
+					
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#">WELCOME</a></li>

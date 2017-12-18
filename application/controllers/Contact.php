@@ -19,6 +19,8 @@ class Contact extends CI_Controller{
 	 	if($response){
 	 		echo"sucess";
 
+	 	}else{
+	 		echo"error";
 	 	}
 	 }
 

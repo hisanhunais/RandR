@@ -51,9 +51,6 @@
         <div class="jumbotron">
             <hr>
            <h3>Contact Us!</h3>
-            Call Us 011-2728585 <br/>
-            Messenger @RnRfoodies <br/>
-            Facebook 'RnR Sweets & Savouries' <br/>
             <hr>
         </div>
         <div class="row">
@@ -64,10 +61,10 @@
                     
                     <div class="col-md-6">
                        <ul> 
-                        Name    : <br/><input type="text" name="name"/><br/><br/>
+                        Name    : <input type="text" name="name"/><br/><br/>
                         Email   : <br/><input type="email" name="eMail"/><br/><br/>
-                        Phone   : <br/><input type="phone" name="phone"/><br/><br/>
-                        Subject : <br/><input type="subject" name="subject"/><br/><br/> 
+                        Phone   : <input type="phone" name="phone"/><br/><br/>
+                        Subject : <input type="subject" name="subject"/><br/><br/> 
                         </ul>
                     </div>
                     <div class="col-md-6">
