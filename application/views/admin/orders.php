@@ -17,7 +17,7 @@
  
   </head>
 
-  <body id="pageBody">
+  <body>
 	<?php
 		$this->load->view("admin/header");
 	?>
@@ -31,8 +31,9 @@
 				<div class="col-md-9">
 					<div class="panel panel-default">
 						<div class="panel-heading main-color-bg">
-							<h3 class="panel-title main-color-bg">Orders</h3>							
-						</div>
+							<h3 class="panel-title main-color-bg">Orders</h3>
+							
+						 </div>
 						<div class="panel-body">
 							<div class="row">
 								<div class = "col-md-12" id="loadSection">
@@ -162,64 +163,38 @@
 
 	<div id="orderDetailsModal" class="modal fade">
 		<div class="modal-dialog">
-			<form method="post" id="update_order_form">
-				<div class="modal-content">
-					<div class="modal-header"">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Order Details</h4>
-					</div>
-					<div class="modal-body" id="order_details">
-					</div>
-					<div class="modal-footer"">
-						<input type="submit" name="submit" value="Update" id="update" class="btn main-color-bg"/>
-						<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Close</button>
+			<div class="modal-content">
+				<div class="modal-header"">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Order Details</h4>
+				</div>
+				<div class="modal-body" id="order_details">
+					<div class= "table-responsive">
+						<table class="table table-bordered">
+							<tr>
+								<td>Item</td>
+								<td>Quantity</td>
+							</tr>';
+							foreach($fetch_orderdetailslist as $row)
+							{
+								$output .= '
+									<tr>
+										<td>'.$row->name.'</td>
+										<td>'.$row->quantity.'</td>
+									</tr>
+								';
+							}
+
+				$output .= '		
+						</table>
 					</div>
 				</div>
-			</form>
+				<div class="modal-footer"">
+					<button type="button" class="btn btn-danger btn-xs" data-dismiss="modal">Close</button>
+				</div>
+			</div>
 		</div>
 	</div>
-
-	<div id="readyOrder" class="modal fade">
-		<div class="modal-dialog">
-			<form method="post" id="ready_order_form">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Ready Order</h4>
-					</div>
-					<div class="modal-body">
-						<p>Are you sure you want to make this Order Ready?</p>
-						<input type="hidden" name="readydata" id="readydata">
-					</div>
-					<div class="modal-footer">
-						<input type="submit" name="submit" value="Ready" id="ready" class="btn main-color-bg" />
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-
-	<div id="completeOrder" class="modal fade">
-		<div class="modal-dialog">
-			<form method="post" id="complete_order_form">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Complete Order</h4>
-					</div>
-					<div class="modal-body">
-						<p>Are you sure you want to Complete this Order?</p>
-						<input type="hidden" name="completedata" id="completedata">
-					</div>
-					<div class="modal-footer">
-						<input type="submit" name="submit" value="Complete" id="complete" class="btn main-color-bg" />
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>	
 
 <?php //include 'footer.php'; ?>
 

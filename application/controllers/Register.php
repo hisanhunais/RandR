@@ -29,13 +29,16 @@ class Register extends CI_Controller {
  		$this->form_validation->set_rules('username', 'Username', 'required|valid_email');
     	$this->form_validation->set_rules('firstname','First Name', 'required');
     	$this->form_validation->set_rules('lastname', 'Last Name', 'required');
+        $this->form_validation->set_rules('phonenumber', 'Phone Number', 'required|regex_match[/^[0-9]{10}$/]');
     	$this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');
     	$this->form_validation->set_rules('passconf', 'Password Confirmation', 'required|matches[password]');
       	$user=array(
       	'username'=>$this->input->post('username'),
       	'firstname'=>$this->input->post('firstname'),
       	'lastname'=>$this->input->post('lastname'),
-      	'password'=>md5($this->input->post('password')));
+      	'phonenumber'=>$this->input->post('phonenumber'),
+      	'password'=>md5($this->input->post('password'))
+        );
      
  
 		$email_check=$this->User->email_check($user['username']);

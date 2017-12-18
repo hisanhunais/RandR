@@ -89,10 +89,6 @@ body{
 	color:#333333;
 }
 
-.dash-box{
-  text-align: center !important;
-}
-
 
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {

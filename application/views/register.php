@@ -54,6 +54,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="lastname" class="col-md-3 control-label">Phone Number</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="phonenumber" placeholder="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="password" class="col-md-3 control-label">Password</label>
                                     <div class="col-md-9">
                                         <input type="password" id ="password" class="form-control" name="password" placeholder="Password" required>

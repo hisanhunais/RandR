@@ -159,6 +159,14 @@ class Admin extends CI_Controller {
 		$this->orders();
 	}
 
+	/*message*/
+	public function messages()
+	{
+		$this->load->model("main_model");
+		$data["fetch_messagelist"] = $this->main_model->get_messages();
+		$this->load->view('admin/messages',$data);
+	}
+	
 
 
 }

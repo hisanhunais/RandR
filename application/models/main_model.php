@@ -162,5 +162,13 @@ class Main_model extends CI_Model
 		$this->db->where("type", "Admin");
 		return $this->db->get()->row();
 	}
+	
+	/*  message*/
+	function get_messages()
+	{
+		$query = $this->db->get("message");
+		return $query;
+	}
+	
 }
 ?>
